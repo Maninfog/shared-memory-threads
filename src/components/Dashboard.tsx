@@ -1,4 +1,3 @@
-
 import { Users, Heart, Home, Briefcase } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useJournalEntries } from '../hooks/useJournalEntries';
@@ -86,13 +85,8 @@ const Dashboard = ({ onGroupSelect }: DashboardProps) => {
               >
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
-                    <div className={`${group.color} p-3 rounded-full relative`}>
+                    <div className={`${group.color} p-3 rounded-full`}>
                       <IconComponent className="w-6 h-6 text-white" />
-                      {postCount > 0 && (
-                        <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                          {postCount}
-                        </div>
-                      )}
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-semibold text-white mb-2">{group.name}</h3>
