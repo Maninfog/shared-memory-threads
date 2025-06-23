@@ -1,5 +1,6 @@
+
 import { useState } from 'react';
-import { Plus, Camera, Mic, Heart, MoreHorizontal, MessageCircle } from 'lucide-react';
+import { Plus, Camera, Mic, Heart, MoreHorizontal, MessageCircle, Repeat2, Share } from 'lucide-react';
 
 interface JournalEntry {
   id: number;
@@ -7,6 +8,7 @@ interface JournalEntry {
   author: string;
   timestamp: string;
   avatar: string;
+  handle: string;
 }
 
 const Journal = () => {
@@ -15,6 +17,7 @@ const Journal = () => {
       id: 1,
       text: "Heute war unser erster gemeinsamer Kochabend über Videocall. Auch wenn wir 6000km auseinander sind, haben wir zusammen Pasta gemacht und es hat sich angefühlt, als wären wir im selben Raum. ❤️",
       author: "Mara",
+      handle: "@mara_loves",
       timestamp: "2h",
       avatar: "M"
     },
@@ -22,7 +25,8 @@ const Journal = () => {
       id: 2,
       text: "Das synchronized cooking war so süß! Nächste Woche probieren wir Sushi 🍣",
       author: "Alex",
-      timestamp: "1h",
+      handle: "@alex_cooks",
+      timestamp: "1h", 
       avatar: "A"
     }
   ]);
@@ -35,6 +39,7 @@ const Journal = () => {
         id: entries.length + 1,
         text: newEntry,
         author: "Du",
+        handle: "@you",
         timestamp: "jetzt",
         avatar: "D"
       };
@@ -44,72 +49,101 @@ const Journal = () => {
   };
 
   return (
-    <section className="bg-black py-8">
-      <div className="max-w-2xl mx-auto px-4">
-        {/* Entry Input - iOS Notes style */}
-        <div className="bg-gray-900 rounded-2xl p-4 mb-6 border border-gray-800">
-          <textarea
-            value={newEntry}
-            onChange={(e) => setNewEntry(e.target.value)}
-            placeholder="Was denkst du gerade..."
-            className="w-full bg-transparent text-white placeholder-gray-400 resize-none outline-none text-base leading-relaxed min-h-[80px]"
-          />
-          <div className="flex items-center justify-between mt-3">
-            <div className="flex space-x-4">
-              <button className="text-gray-400 hover:text-white transition-colors">
-                <Camera className="w-5 h-5" />
-              </button>
-              <button className="text-gray-400 hover:text-white transition-colors">
-                <Mic className="w-5 h-5" />
-              </button>
+    <section className="bg-black min-h-screen">
+      <div className="max-w-2xl mx-auto">
+        {/* Header */}
+        <div className="sticky top-0 bg-black/80 backdrop-blur-md border-b border-gray-800 p-4">
+          <h1 className="text-xl font-bold text-white">Home</h1>
+        </div>
+
+        {/* Entry Input */}
+        <div className="border-b border-gray-800 p-4">
+          <div className="flex space-x-3">
+            <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-white font-medium">D</span>
             </div>
-            <button
-              onClick={addEntry}
-              disabled={!newEntry.trim()}
-              className="bg-white text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Teilen
-            </button>
+            <div className="flex-1">
+              <textarea
+                value={newEntry}
+                onChange={(e) => setNewEntry(e.target.value)}
+                placeholder="Was passiert gerade?"
+                className="w-full bg-transparent text-white placeholder-gray-500 resize-none outline-none text-xl leading-relaxed min-h-[120px]"
+              />
+              <div className="flex items-center justify-between mt-4">
+                <div className="flex space-x-4">
+                  <button className="text-blue-400 hover:bg-blue-400/10 p-2 rounded-full transition-colors">
+                    <Camera className="w-5 h-5" />
+                  </button>
+                  <button className="text-blue-400 hover:bg-blue-400/10 p-2 rounded-full transition-colors">
+                    <Mic className="w-5 h-5" />
+                  </button>
+                </div>
+                <button
+                  onClick={addEntry}
+                  disabled={!newEntry.trim()}
+                  className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition-colors font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Posten
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Entries Timeline - Instagram style */}
-        <div className="space-y-4">
+        {/* Entries Timeline */}
+        <div>
           {entries.map((entry) => (
-            <div key={entry.id} className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden">
-              {/* Header */}
-              <div className="flex items-center justify-between p-4 pb-2">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-medium text-sm">{entry.avatar}</span>
+            <article key={entry.id} className="border-b border-gray-800 p-4 hover:bg-gray-950/50 transition-colors cursor-pointer">
+              <div className="flex space-x-3">
+                {/* Avatar */}
+                <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-medium">{entry.avatar}</span>
+                </div>
+                
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  {/* Header */}
+                  <div className="flex items-center space-x-2 mb-1">
+                    <span className="font-bold text-white hover:underline cursor-pointer">{entry.author}</span>
+                    <span className="text-gray-500 text-sm">{entry.handle}</span>
+                    <span className="text-gray-500 text-sm">·</span>
+                    <span className="text-gray-500 text-sm hover:underline cursor-pointer">{entry.timestamp}</span>
+                    <div className="ml-auto">
+                      <button className="text-gray-500 hover:bg-gray-800 p-1.5 rounded-full transition-colors">
+                        <MoreHorizontal className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-medium text-white text-sm">{entry.author}</span>
-                    <span className="text-gray-400 text-xs ml-2">{entry.timestamp}</span>
+                  
+                  {/* Text Content */}
+                  <div className="text-white text-base leading-normal mb-3">
+                    {entry.text}
+                  </div>
+                  
+                  {/* Actions */}
+                  <div className="flex items-center justify-between max-w-md">
+                    <button className="flex items-center space-x-2 text-gray-500 hover:text-blue-400 hover:bg-blue-400/10 px-3 py-1.5 rounded-full transition-colors group">
+                      <MessageCircle className="w-4 h-4" />
+                      <span className="text-sm">12</span>
+                    </button>
+                    
+                    <button className="flex items-center space-x-2 text-gray-500 hover:text-green-400 hover:bg-green-400/10 px-3 py-1.5 rounded-full transition-colors group">
+                      <Repeat2 className="w-4 h-4" />
+                      <span className="text-sm">3</span>
+                    </button>
+                    
+                    <button className="flex items-center space-x-2 text-gray-500 hover:text-red-400 hover:bg-red-400/10 px-3 py-1.5 rounded-full transition-colors group">
+                      <Heart className="w-4 h-4" />
+                      <span className="text-sm">24</span>
+                    </button>
+                    
+                    <button className="flex items-center space-x-2 text-gray-500 hover:text-blue-400 hover:bg-blue-400/10 px-3 py-1.5 rounded-full transition-colors group">
+                      <Share className="w-4 h-4" />
+                    </button>
                   </div>
                 </div>
-                <button className="text-gray-400 hover:text-white transition-colors">
-                  <MoreHorizontal className="w-4 h-4" />
-                </button>
               </div>
-              
-              {/* Content */}
-              <div className="px-4 pb-2">
-                <p className="text-white text-base leading-relaxed">{entry.text}</p>
-              </div>
-              
-              {/* Actions */}
-              <div className="px-4 pb-4 flex items-center space-x-6">
-                <button className="flex items-center space-x-1 text-gray-400 hover:text-red-400 transition-colors">
-                  <Heart className="w-4 h-4" />
-                  <span className="text-sm">Gefällt mir</span>
-                </button>
-                <button className="flex items-center space-x-1 text-gray-400 hover:text-blue-400 transition-colors">
-                  <MessageCircle className="w-4 h-4" />
-                  <span className="text-sm">Kommentieren</span>
-                </button>
-              </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
