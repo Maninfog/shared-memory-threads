@@ -1,5 +1,6 @@
 
 import { Home, Heart, Plus, MessageCircle, User } from 'lucide-react';
+import ProfileSheet from './ProfileSheet';
 
 interface BottomNavProps {
   onHomeClick?: () => void;
@@ -30,11 +31,13 @@ const BottomNav = ({ onHomeClick }: BottomNavProps) => {
           <MessageCircle className="w-6 h-6 text-gray-400" />
         </button>
         
-        <button className="flex flex-col items-center justify-center p-2">
-          <div className="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center">
-            <User className="w-4 h-4 text-white" />
-          </div>
-        </button>
+        <ProfileSheet>
+          <button className="flex flex-col items-center justify-center p-2">
+            <div className="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center">
+              <User className="w-4 h-4 text-white" />
+            </div>
+          </button>
+        </ProfileSheet>
       </div>
     </nav>
   );
