@@ -67,7 +67,7 @@ const CreateEntryDialog = ({
   };
   return <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl bg-background border-border text-foreground rounded-xl p-0 gap-0 shadow-lg">
-        <div className="p-6 pb-4 bg-slate-500">
+        <div className="p-6 pb-4 bg-slate-950">
           <h2 className="text-xl font-semibold mb-6 text-slate-50">Neuer Eintrag</h2>
           
           {/* Group Selection */}
@@ -99,7 +99,7 @@ const CreateEntryDialog = ({
         </div>
 
         {/* Bottom Section */}
-        <div className="px-6 pb-6 bg-slate-500">
+        <div className="px-6 pb-6 bg-slate-950">
           {/* Media and AI Controls */}
           <div className="flex items-center justify-between">
             <div className="flex space-x-2">
