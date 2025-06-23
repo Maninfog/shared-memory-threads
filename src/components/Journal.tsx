@@ -2,10 +2,9 @@
 import { useState, useEffect } from 'react';
 import JournalHeader from './JournalHeader';
 import JournalContent from './JournalContent';
-import AIFeedback from './AIFeedback';
+import PostingAnimation from './PostingAnimation';
 import { useJournalEntries } from '../hooks/useJournalEntries';
 import { groupNames } from '../data/journalData';
-import { generateAIFeedback } from '../utils/aiFeedback';
 
 interface JournalProps {
   selectedGroup?: string;
@@ -16,12 +15,12 @@ interface JournalProps {
 
 const Journal = ({ selectedGroup, onBackToDashboard, pendingEntry, onEntryProcessed }: JournalProps) => {
   const { entries, addEntry } = useJournalEntries();
-  const [showAIFeedback, setShowAIFeedback] = useState(false);
-  const [aiFeedbackText, setAIFeedbackText] = useState('');
+  const [showPostingAnimation, setShowPostingAnimation] = useState(false);
 
   // Handle pending entry from the create dialog
   useEffect(() => {
     if (pendingEntry && selectedGroup) {
+      setShowPostingAnimation(true);
       handleAddEntry(pendingEntry);
       onEntryProcessed?.();
     }
@@ -41,15 +40,11 @@ const Journal = ({ selectedGroup, onBackToDashboard, pendingEntry, onEntryProces
 
   const handleAddEntry = (text: string) => {
     addEntry(text, selectedGroup);
-    
-    // Generate and show AI feedback
-    const feedback = generateAIFeedback(text, selectedGroup);
-    setAIFeedbackText(feedback);
-    setShowAIFeedback(true);
+    setShowPostingAnimation(true);
   };
 
-  const handleDismissFeedback = () => {
-    setShowAIFeedback(false);
+  const handlePostingComplete = () => {
+    setShowPostingAnimation(false);
   };
 
   const currentGroupName = selectedGroup ? groupNames[selectedGroup] : 'Home';
@@ -65,10 +60,9 @@ const Journal = ({ selectedGroup, onBackToDashboard, pendingEntry, onEntryProces
           onAddMember={handleAddMember}
         />
 
-        <AIFeedback
-          isVisible={showAIFeedback}
-          onDismiss={handleDismissFeedback}
-          feedbackText={aiFeedbackText}
+        <PostingAnimation
+          isVisible={showPostingAnimation}
+          onComplete={handlePostingComplete}
         />
 
         <JournalContent
