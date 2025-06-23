@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import Journal from '@/components/Journal';
 import Dashboard from '@/components/Dashboard';
-import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 import BottomNav from '@/components/BottomNav';
 
@@ -25,7 +24,6 @@ const Index = () => {
       {currentView === 'dashboard' ? (
         <>
           <Dashboard onGroupSelect={handleGroupSelect} />
-          <CTA />
           <Footer />
         </>
       ) : (
