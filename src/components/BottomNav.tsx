@@ -16,9 +16,7 @@ const BottomNav = ({ onHomeClick, onChatClick }: BottomNavProps) => {
   };
 
   const handleChatClick = () => {
-    if (onChatClick) {
-      onChatClick();
-    }
+    navigate('/');
   };
 
   return (
