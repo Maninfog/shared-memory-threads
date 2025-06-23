@@ -44,7 +44,7 @@ const BottomNav = ({ onHomeClick, onChatClick }: BottomNavProps) => {
           onClick={handleChatClick}
           className="flex flex-col items-center justify-center p-2"
         >
-          <MessageCircle className="w-6 h-6 text-gray-400" />
+          <MessageCircle className="w-6 h-6 text-white hover:text-gray-300" />
         </button>
         
         <ProfileSheet>
