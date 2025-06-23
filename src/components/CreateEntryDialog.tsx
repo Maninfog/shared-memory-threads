@@ -65,22 +65,22 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl bg-card border-border text-card-foreground rounded-xl p-0 gap-0 shadow-lg">
+      <DialogContent className="sm:max-w-2xl bg-background border-border text-foreground rounded-xl p-0 gap-0 shadow-lg">
         <div className="p-6 pb-4">
-          <h2 className="text-xl font-semibold mb-6">Neuer Eintrag</h2>
+          <h2 className="text-xl font-semibold mb-6 text-foreground">Neuer Eintrag</h2>
           
           {/* Group Selection */}
           <div className="mb-4">
             <Select value={selectedGroup} onValueChange={setSelectedGroup}>
-              <SelectTrigger className="bg-muted border-border text-foreground h-12 rounded-lg">
+              <SelectTrigger className="bg-secondary border-border text-foreground h-12 rounded-lg">
                 <SelectValue placeholder="Gruppe auswählen..." />
               </SelectTrigger>
-              <SelectContent className="bg-popover border-border rounded-lg">
+              <SelectContent className="bg-background border-border rounded-lg">
                 {groups.map((group) => (
                   <SelectItem 
                     key={group.id} 
                     value={group.id}
-                    className="text-popover-foreground hover:bg-accent focus:bg-accent"
+                    className="text-foreground hover:bg-secondary focus:bg-secondary"
                   >
                     <div className="flex items-center space-x-2">
                       <div className={`w-3 h-3 rounded-full ${group.color}`} />
@@ -99,7 +99,7 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
               onChange={(e) => setEntryText(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Teile deine Gedanken..."
-              className="bg-muted border-border text-foreground placeholder-muted-foreground min-h-[120px] resize-none rounded-lg pr-16 focus:ring-2 focus:ring-ring focus:border-transparent"
+              className="bg-secondary border-border text-foreground placeholder-muted-foreground min-h-[120px] resize-none rounded-lg pr-16 focus:ring-2 focus:ring-ring focus:border-transparent"
             />
             
             {/* Send Button */}
@@ -118,10 +118,10 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
           {/* Media and AI Controls */}
           <div className="flex items-center justify-between">
             <div className="flex space-x-2">
-              <button className="text-muted-foreground hover:text-foreground hover:bg-muted p-2 rounded-lg transition-colors">
+              <button className="text-muted-foreground hover:text-foreground hover:bg-secondary p-2 rounded-lg transition-colors">
                 <Camera className="w-5 h-5" />
               </button>
-              <button className="text-muted-foreground hover:text-foreground hover:bg-muted p-2 rounded-lg transition-colors">
+              <button className="text-muted-foreground hover:text-foreground hover:bg-secondary p-2 rounded-lg transition-colors">
                 <Mic className="w-5 h-5" />
               </button>
             </div>
@@ -131,7 +131,7 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 aiEnabled 
                   ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' 
-                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                  : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
               }`}
             >
               <Sparkles className="w-4 h-4" />
