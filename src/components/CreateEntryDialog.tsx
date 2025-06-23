@@ -60,7 +60,7 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-gray-900 border-gray-700 text-white">
+      <DialogContent className="sm:max-w-md bg-gray-900 border-gray-700 text-white rounded-3xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">Neuer Eintrag</DialogTitle>
         </DialogHeader>
@@ -116,31 +116,25 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
           </div>
 
           {/* Action Buttons */}
-          <div className="flex space-x-3 pt-4">
-            <Button
-              onClick={handleCancel}
-              variant="outline"
-              className="flex-1 bg-transparent border-gray-600 text-gray-300 hover:bg-gray-800"
-            >
-              Abbrechen
-            </Button>
-            
+          <div className="flex space-x-2 pt-4">
             <Button
               onClick={() => setAiEnabled(!aiEnabled)}
               variant={aiEnabled ? "default" : "outline"}
-              className={`px-4 ${
+              size="sm"
+              className={`${
                 aiEnabled 
                   ? 'bg-purple-600 hover:bg-purple-700 text-white' 
                   : 'bg-transparent border-gray-600 text-gray-300 hover:bg-gray-800'
               }`}
             >
-              <Sparkles className="w-4 h-4 mr-2" />
-              KI
+              <Sparkles className="w-4 h-4 mr-1" />
+              Lumen
             </Button>
             
             <Button
               onClick={handleSubmit}
               disabled={!entryText.trim() || !selectedGroup}
+              size="sm"
               className="flex-1 bg-blue-500 hover:bg-blue-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Posten
@@ -153,9 +147,9 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
               <div className="flex items-start space-x-2">
                 <Sparkles className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
                 <div className="text-sm text-purple-200">
-                  <p className="font-medium mb-1">KI-Journaling aktiviert</p>
+                  <p className="font-medium mb-1">Lumen-Journaling aktiviert</p>
                   <p className="text-purple-300">
-                    Die KI wird deinen Eintrag analysieren und dir Fragen basierend auf 
+                    Lumen wird deinen Eintrag analysieren und dir Fragen basierend auf 
                     deinen bisherigen Einträgen in dieser Gruppe stellen.
                   </p>
                 </div>
