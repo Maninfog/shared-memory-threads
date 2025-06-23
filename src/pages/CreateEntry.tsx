@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import { ArrowUp, ArrowLeft, Sparkles } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useNavigate } from 'react-router-dom';
+import BottomNav from '@/components/BottomNav';
 
 interface CreateEntryProps {
   onCreateEntry?: (entry: {
@@ -84,7 +84,7 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full">
+      <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full pb-20">
         {/* Center content when no messages */}
         <div className="flex-1 flex items-center justify-center p-6">
           <div className="text-center max-w-md">
@@ -186,6 +186,8 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
           )}
         </div>
       </div>
+
+      <BottomNav />
     </div>
   );
 };
