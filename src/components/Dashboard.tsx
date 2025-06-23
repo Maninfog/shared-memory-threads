@@ -1,6 +1,7 @@
 
 import { Users, Heart, Home, Briefcase } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { useJournalEntries } from '../hooks/useJournalEntries';
 
 interface Group {
   id: string;
@@ -17,6 +18,8 @@ interface DashboardProps {
 }
 
 const Dashboard = ({ onGroupSelect }: DashboardProps) => {
+  const { entries } = useJournalEntries();
+
   const groups: Group[] = [
     {
       id: 'best-friend',
@@ -56,6 +59,11 @@ const Dashboard = ({ onGroupSelect }: DashboardProps) => {
     }
   ];
 
+  // Calculate post count for each group
+  const getPostCount = (groupId: string) => {
+    return entries.filter(entry => entry.group === groupId).length;
+  };
+
   return (
     <section className="bg-black min-h-screen">
       <div className="max-w-4xl mx-auto p-6">
@@ -69,6 +77,7 @@ const Dashboard = ({ onGroupSelect }: DashboardProps) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {groups.map((group) => {
             const IconComponent = group.icon;
+            const postCount = getPostCount(group.id);
             return (
               <Card
                 key={group.id}
@@ -77,15 +86,20 @@ const Dashboard = ({ onGroupSelect }: DashboardProps) => {
               >
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
-                    <div className={`${group.color} p-3 rounded-full`}>
+                    <div className={`${group.color} p-3 rounded-full relative`}>
                       <IconComponent className="w-6 h-6 text-white" />
+                      {postCount > 0 && (
+                        <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                          {postCount}
+                        </div>
+                      )}
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-semibold text-white mb-2">{group.name}</h3>
                       <p className="text-gray-400 text-sm mb-4">{group.description}</p>
                       <div className="flex items-center justify-between text-xs text-gray-500">
                         <span>{group.memberCount} member{group.memberCount > 1 ? 's' : ''}</span>
-                        <span>Last activity: {group.lastActivity}</span>
+                        <span>{postCount} post{postCount !== 1 ? 's' : ''}</span>
                       </div>
                     </div>
                   </div>
