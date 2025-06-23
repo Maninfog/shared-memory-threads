@@ -1,8 +1,10 @@
 
 import { useState } from 'react';
+import { Star, Heart, Sparkles } from 'lucide-react';
 import JournalHeader from './JournalHeader';
 import JournalEntryInput from './JournalEntryInput';
-import JournalTimeline from './JournalTimeline';
+import HighlightChapters from './HighlightChapters';
+import MonthlyEntries from './MonthlyEntries';
 
 interface JournalEntry {
   id: number;
@@ -13,6 +15,7 @@ interface JournalEntry {
   handle: string;
   group: string;
   groupColor: string;
+  date: Date;
 }
 
 interface JournalProps {
@@ -30,7 +33,8 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
       timestamp: "2h",
       avatar: "M",
       group: "family",
-      groupColor: "bg-blue-500"
+      groupColor: "bg-blue-500",
+      date: new Date('2024-12-23T16:00:00')
     },
     {
       id: 2,
@@ -40,7 +44,8 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
       timestamp: "1h", 
       avatar: "A",
       group: "best-friend",
-      groupColor: "bg-pink-500"
+      groupColor: "bg-pink-500",
+      date: new Date('2024-12-23T17:00:00')
     },
     {
       id: 3,
@@ -50,7 +55,8 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
       timestamp: "4h",
       avatar: "S",
       group: "work-colleagues",
-      groupColor: "bg-green-500"
+      groupColor: "bg-green-500",
+      date: new Date('2024-12-23T14:00:00')
     },
     {
       id: 4,
@@ -60,7 +66,19 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
       timestamp: "1d",
       avatar: "D",
       group: "private",
-      groupColor: "bg-purple-500"
+      groupColor: "bg-purple-500",
+      date: new Date('2024-12-22T10:00:00')
+    },
+    {
+      id: 5,
+      text: "Unser Familienurlaub in den Bergen war unvergesslich. Die Kinder haben zum ersten Mal Schnee gesehen!",
+      author: "Papa",
+      handle: "@papa_berg",
+      timestamp: "3d",
+      avatar: "P",
+      group: "family",
+      groupColor: "bg-blue-500",
+      date: new Date('2024-11-15T12:00:00')
     }
   ]);
 
@@ -78,6 +96,34 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
     'work-colleagues': 'bg-green-500'
   };
 
+  // Sample highlight chapters data
+  const highlightChapters = selectedGroup ? [
+    {
+      id: 'special-moments',
+      title: 'Besondere Momente',
+      description: 'Die schönsten Erinnerungen aus dieser Zeit',
+      icon: Heart,
+      color: 'bg-red-500',
+      entryCount: 3
+    },
+    {
+      id: 'milestones',
+      title: 'Meilensteine',
+      description: 'Wichtige Ereignisse und Erfolge',
+      icon: Star,
+      color: 'bg-yellow-500',
+      entryCount: 2
+    },
+    {
+      id: 'reflections',
+      title: 'Reflexionen',
+      description: 'Tiefe Gedanken und Erkenntnisse',
+      icon: Sparkles,
+      color: 'bg-purple-500',
+      entryCount: 4
+    }
+  ] : [];
+
   const filteredEntries = selectedGroup 
     ? entries.filter(entry => entry.group === selectedGroup)
     : entries;
@@ -90,6 +136,11 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
     console.log('Mitglied hinzufügen geklickt');
   };
 
+  const handleChapterSelect = (chapterId: string) => {
+    console.log('Chapter selected:', chapterId);
+    // Here you would implement chapter-specific filtering
+  };
+
   const addEntry = (text: string) => {
     if (selectedGroup) {
       const entry: JournalEntry = {
@@ -100,7 +151,8 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
         timestamp: "jetzt",
         avatar: "D",
         group: selectedGroup,
-        groupColor: groupColors[selectedGroup as keyof typeof groupColors] || 'bg-gray-500'
+        groupColor: groupColors[selectedGroup as keyof typeof groupColors] || 'bg-gray-500',
+        date: new Date()
       };
       setEntries([entry, ...entries]);
     }
@@ -123,7 +175,14 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
           <JournalEntryInput onAddEntry={addEntry} />
         )}
 
-        <JournalTimeline
+        {selectedGroup && (
+          <HighlightChapters 
+            chapters={highlightChapters}
+            onChapterSelect={handleChapterSelect}
+          />
+        )}
+
+        <MonthlyEntries
           entries={filteredEntries}
           selectedGroup={selectedGroup}
           groupNames={groupNames}
