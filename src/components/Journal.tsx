@@ -96,27 +96,27 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
     'work-colleagues': 'bg-green-500'
   };
 
-  // Sample highlight chapters data
+  // Sample highlight chapters data - styled like Notion cards
   const highlightChapters = selectedGroup ? [
     {
       id: 'special-moments',
       title: 'Besondere Momente',
-      description: 'Die schönsten Erinnerungen aus dieser Zeit',
+      description: '3 Monate in Reflexionen',
       icon: Heart,
-      color: 'bg-red-500',
+      color: 'bg-orange-500',
       entryCount: 3
     },
     {
       id: 'milestones',
       title: 'Meilensteine',
-      description: 'Wichtige Ereignisse und Erfolge',
+      description: 'Performance Cycle Q4',
       icon: Star,
-      color: 'bg-yellow-500',
+      color: 'bg-blue-500',
       entryCount: 2
     },
     {
       id: 'reflections',
-      title: 'Reflexionen',
+      title: 'Check-In',
       description: 'Tiefe Gedanken und Erkenntnisse',
       icon: Sparkles,
       color: 'bg-purple-500',
@@ -171,11 +171,14 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
           onAddMember={handleAddMember}
         />
 
-        {selectedGroup && (
-          <HighlightChapters 
-            chapters={highlightChapters}
-            onChapterSelect={handleChapterSelect}
-          />
+        {selectedGroup && highlightChapters.length > 0 && (
+          <div className="px-4 py-6">
+            <h2 className="text-gray-400 text-sm font-medium mb-4">Jump back in</h2>
+            <HighlightChapters 
+              chapters={highlightChapters}
+              onChapterSelect={handleChapterSelect}
+            />
+          </div>
         )}
 
         {selectedGroup && (
