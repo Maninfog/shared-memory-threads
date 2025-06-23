@@ -172,14 +172,14 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
         />
 
         {selectedGroup && (
-          <JournalEntryInput onAddEntry={addEntry} />
-        )}
-
-        {selectedGroup && (
           <HighlightChapters 
             chapters={highlightChapters}
             onChapterSelect={handleChapterSelect}
           />
+        )}
+
+        {selectedGroup && (
+          <JournalEntryInput onAddEntry={addEntry} />
         )}
 
         <MonthlyEntries
