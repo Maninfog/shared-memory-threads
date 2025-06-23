@@ -50,7 +50,7 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
       setEntryText('');
       setSelectedGroup('');
       setAiEnabled(false);
-      navigate('/');
+      navigate('/dashboard');
     }
   };
 
@@ -58,7 +58,11 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
     setEntryText('');
     setSelectedGroup('');
     setAiEnabled(false);
-    navigate('/');
+    navigate('/dashboard');
+  };
+
+  const handleChatClick = () => {
+    navigate('/dashboard');
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -187,7 +191,7 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
         </div>
       </div>
 
-      <BottomNav />
+      <BottomNav onChatClick={handleChatClick} />
     </div>
   );
 };

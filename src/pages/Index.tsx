@@ -3,10 +3,12 @@ import { useState } from 'react';
 import Journal from '@/components/Journal';
 import Dashboard from '@/components/Dashboard';
 import BottomNav from '@/components/BottomNav';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<'dashboard' | 'group'>('dashboard');
   const [selectedGroup, setSelectedGroup] = useState<string | undefined>(undefined);
+  const navigate = useNavigate();
 
   const handleGroupSelect = (groupId: string) => {
     setSelectedGroup(groupId);
@@ -19,8 +21,8 @@ const Index = () => {
   };
 
   const handleChatClick = () => {
-    // Navigate to dashboard when chat icon is clicked
-    handleBackToDashboard();
+    // Navigate to CreateEntry when chat icon is clicked
+    navigate('/');
   };
 
   return (
