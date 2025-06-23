@@ -1,5 +1,5 @@
 
-import { Heart, MessageCircle, Calendar, Shield } from 'lucide-react';
+import { Heart, MessageCircle, Shield } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -16,12 +16,9 @@ const Hero = () => {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12">
-          <button className="bg-white text-gray-900 px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors font-medium">
+        <div className="flex justify-center mb-12">
+          <button className="bg-white text-gray-900 px-8 py-3 rounded-xl hover:bg-gray-100 transition-colors font-medium">
             Kostenfrei starten
-          </button>
-          <button className="border border-gray-600 text-gray-300 px-6 py-3 rounded-xl hover:border-gray-500 hover:text-white transition-colors font-medium">
-            Demo ansehen
           </button>
         </div>
 

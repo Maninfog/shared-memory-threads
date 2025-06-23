@@ -8,10 +8,10 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-6 h-6 bg-gray-800 rounded-lg flex items-center justify-center">
+              <div className="w-6 h-6 bg-gradient-to-br from-orange-400 to-pink-500 rounded-lg flex items-center justify-center">
                 <Heart className="w-3 h-3 text-white" />
               </div>
-              <span className="font-medium text-white">Threaded</span>
+              <span className="font-medium text-white">Lumen</span>
             </div>
             <p className="text-gray-400 text-sm">
               Das private Gedächtnis zwischen Menschen.
@@ -39,7 +39,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-            <p>© 2025 Threaded. Alle Rechte vorbehalten.</p>
+            <p>© 2025 Lumen. Alle Rechte vorbehalten.</p>
             <div className="flex space-x-4 mt-4 md:mt-0">
               <a href="#" className="hover:text-white transition-colors">Datenschutz</a>
               <a href="#" className="hover:text-white transition-colors">AGB</a>

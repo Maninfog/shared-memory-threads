@@ -7,10 +7,10 @@ const Header = () => {
       <div className="max-w-4xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-7 h-7 bg-gradient-to-br from-gray-600 to-gray-800 rounded-lg flex items-center justify-center">
+            <div className="w-7 h-7 bg-gradient-to-br from-orange-400 to-pink-500 rounded-lg flex items-center justify-center">
               <Heart className="w-4 h-4 text-white" />
             </div>
-            <span className="font-medium text-lg text-white">Threaded</span>
+            <span className="font-medium text-lg text-white">Lumen</span>
           </div>
           
           <nav className="hidden md:flex items-center space-x-4">

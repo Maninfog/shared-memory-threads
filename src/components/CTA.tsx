@@ -14,13 +14,10 @@ const CTA = () => {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-          <button className="bg-white text-gray-900 px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors font-medium flex items-center justify-center space-x-2">
+        <div className="flex justify-center mb-8">
+          <button className="bg-white text-gray-900 px-8 py-3 rounded-xl hover:bg-gray-100 transition-colors font-medium flex items-center justify-center space-x-2">
             <span>Jetzt kostenfrei starten</span>
             <ArrowRight className="w-4 h-4" />
-          </button>
-          <button className="border border-gray-600 text-gray-300 px-6 py-3 rounded-xl hover:border-gray-500 hover:text-white transition-colors font-medium">
-            Demo ansehen
           </button>
         </div>
 
