@@ -1,3 +1,4 @@
+
 import { Users, Heart, Home, Briefcase } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useJournalEntries } from '../hooks/useJournalEntries';
@@ -65,14 +66,35 @@ const Dashboard = ({ onGroupSelect }: DashboardProps) => {
 
   return (
     <section className="bg-black min-h-screen">
-      <div className="max-w-4xl mx-auto p-6">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Your Groups</h1>
-          <p className="text-gray-400">Choose a group to see the latest updates</p>
-        </div>
+      {/* Header Section (replaces Hero) */}
+      <div className="bg-black py-8 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="mb-6">
+            <div className="flex items-center justify-center space-x-2 mb-6">
+              <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-pink-500 rounded-lg flex items-center justify-center">
+                <Heart className="w-5 h-5 text-white" />
+              </div>
+              <span className="font-medium text-2xl text-white">Lumen</span>
+            </div>
+            
+            <h1 className="text-3xl md:text-4xl font-semibold text-white mb-4 leading-tight">
+              Your Groups
+            </h1>
+            <p className="text-base text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed">
+              Choose a group to see the latest updates and share your thoughts
+            </p>
+          </div>
 
-        {/* Group Cards Grid */}
+          <div className="flex justify-center mb-8">
+            <button className="bg-white text-gray-900 px-6 py-2.5 rounded-xl hover:bg-gray-100 transition-colors font-medium">
+              Kostenfrei starten
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Group Cards Grid */}
+      <div className="max-w-4xl mx-auto p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {groups.map((group) => {
             const IconComponent = group.icon;

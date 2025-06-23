@@ -37,7 +37,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen pb-20">
+    <div className="min-h-screen pb-20 bg-black">
       {currentView === 'dashboard' ? (
         <Dashboard onGroupSelect={handleGroupSelect} />
       ) : (
