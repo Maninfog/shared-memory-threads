@@ -18,6 +18,22 @@ const Index = () => {
     setSelectedGroup(undefined);
   };
 
+  const handleCreateEntry = (entry: { text: string; group: string; aiEnabled: boolean }) => {
+    console.log('Neuer Eintrag erstellt:', entry);
+    
+    // Navigate to the selected group after creating entry
+    setSelectedGroup(entry.group);
+    setCurrentView('group');
+    
+    // Here you would typically save the entry to your state/database
+    // For now, we'll just log it and navigate to the group
+    
+    if (entry.aiEnabled) {
+      console.log('KI-Journaling ist aktiviert für diesen Eintrag');
+      // Here you would trigger the AI functionality
+    }
+  };
+
   return (
     <div className="min-h-screen pb-20">
       {currentView === 'dashboard' ? (
@@ -28,7 +44,10 @@ const Index = () => {
           onBackToDashboard={handleBackToDashboard} 
         />
       )}
-      <BottomNav onHomeClick={handleBackToDashboard} />
+      <BottomNav 
+        onHomeClick={handleBackToDashboard}
+        onCreateEntry={handleCreateEntry}
+      />
     </div>
   );
 };
