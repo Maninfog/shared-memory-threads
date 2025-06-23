@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import Journal from '@/components/Journal';
 import Dashboard from '@/components/Dashboard';
-import Footer from '@/components/Footer';
 import BottomNav from '@/components/BottomNav';
 
 const Index = () => {
@@ -22,10 +21,7 @@ const Index = () => {
   return (
     <div className="min-h-screen pb-20">
       {currentView === 'dashboard' ? (
-        <>
-          <Dashboard onGroupSelect={handleGroupSelect} />
-          <Footer />
-        </>
+        <Dashboard onGroupSelect={handleGroupSelect} />
       ) : (
         <Journal 
           selectedGroup={selectedGroup} 
