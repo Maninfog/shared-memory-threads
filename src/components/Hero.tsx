@@ -3,59 +3,39 @@ import { Heart, MessageCircle, Calendar, Shield } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="bg-gradient-to-br from-orange-50 via-pink-50 to-blue-50 py-20">
-      <div className="max-w-6xl mx-auto px-4 text-center">
+    <section className="bg-gray-900 py-16 px-4">
+      <div className="max-w-3xl mx-auto text-center">
         <div className="mb-8">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Das private <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-600">Gedächtnis</span><br />
-            zwischen Menschen
+          <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
+            Euer privates<br />
+            <span className="text-gray-400">Gedächtnis</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Threaded ist euer geschützter Ort für gemeinsame Geschichten, Erinnerungen und emotionale Tiefe. 
-            Wo WhatsApp vergisst, bewahrt Threaded auf – intelligent, privat und mit Liebe zum Detail.
+          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Wie iOS Notes, aber für zwei. Sammelt eure Momente, 
+            Gedanken und Erinnerungen an einem sicheren Ort.
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-          <button className="bg-gradient-to-r from-orange-400 to-pink-500 text-white px-8 py-4 rounded-full hover:from-orange-500 hover:to-pink-600 transition-all duration-300 font-semibold text-lg shadow-lg">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12">
+          <button className="bg-white text-gray-900 px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors font-medium">
             Kostenfrei starten
           </button>
-          <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-full hover:border-gray-400 transition-all duration-300 font-semibold text-lg">
+          <button className="border border-gray-600 text-gray-300 px-6 py-3 rounded-xl hover:border-gray-500 hover:text-white transition-colors font-medium">
             Demo ansehen
           </button>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-              <MessageCircle className="w-8 h-8 text-orange-500" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Gemeinsam schreiben</h3>
-            <p className="text-gray-600 text-sm">Teilt Gedanken, Fotos und Momente in eurem privaten Raum</p>
+        <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+            <MessageCircle className="w-8 h-8 text-gray-400 mb-3" />
+            <h3 className="font-medium text-white mb-2">Gemeinsam schreiben</h3>
+            <p className="text-gray-400 text-sm">Wie in Notes, aber synchron mit der Person, die dir wichtig ist</p>
           </div>
           
-          <div className="text-center">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-              <Heart className="w-8 h-8 text-pink-500" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">KI versteht euch</h3>
-            <p className="text-gray-600 text-sm">Automatische Tags, Stimmungsanalyse und schöne Rückblicke</p>
-          </div>
-          
-          <div className="text-center">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-              <Calendar className="w-8 h-8 text-blue-500" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Timeline-Magie</h3>
-            <p className="text-gray-600 text-sm">Eure Geschichte wird automatisch zur Timeline eurer Beziehung</p>
-          </div>
-          
-          <div className="text-center">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-              <Shield className="w-8 h-8 text-green-500" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">100% privat</h3>
-            <p className="text-gray-600 text-sm">Ende-zu-Ende verschlüsselt – nur ihr könnt eure Inhalte sehen</p>
+          <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+            <Shield className="w-8 h-8 text-gray-400 mb-3" />
+            <h3 className="font-medium text-white mb-2">Komplett privat</h3>
+            <p className="text-gray-400 text-sm">Ende-zu-Ende verschlüsselt – nur ihr könnt eure Gedanken sehen</p>
           </div>
         </div>
       </div>

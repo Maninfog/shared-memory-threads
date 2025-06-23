@@ -1,14 +1,13 @@
 
 import { useState } from 'react';
-import { Plus, Camera, Mic, Heart, Calendar, Tag } from 'lucide-react';
+import { Plus, Camera, Mic, Heart, MoreHorizontal } from 'lucide-react';
 
 interface JournalEntry {
   id: number;
   text: string;
   author: string;
   timestamp: string;
-  mood: string;
-  tags: string[];
+  avatar: string;
 }
 
 const Journal = () => {
@@ -17,17 +16,15 @@ const Journal = () => {
       id: 1,
       text: "Heute war unser erster gemeinsamer Kochabend über Videocall. Auch wenn wir 6000km auseinander sind, haben wir zusammen Pasta gemacht und es hat sich angefühlt, als wären wir im selben Raum. ❤️",
       author: "Mara",
-      timestamp: "vor 2 Stunden",
-      mood: "💕",
-      tags: ["Fernbeziehung", "Kochen", "Videocall"]
+      timestamp: "2h",
+      avatar: "M"
     },
     {
       id: 2,
-      text: "Das Foto von unserem 'synchronized cooking' ist zu süß geworden! Ich freu mich schon auf nächste Woche, wenn wir Sushi probieren.",
+      text: "Das synchronized cooking war so süß! Nächste Woche probieren wir Sushi 🍣",
       author: "Alex",
-      timestamp: "vor 1 Stunde",
-      mood: "🥰",
-      tags: ["Kochen", "Pläne", "Sushi"]
+      timestamp: "1h",
+      avatar: "A"
     }
   ]);
 
@@ -39,9 +36,8 @@ const Journal = () => {
         id: entries.length + 1,
         text: newEntry,
         author: "Du",
-        timestamp: "gerade eben",
-        mood: "😊",
-        tags: ["Neu"]
+        timestamp: "jetzt",
+        avatar: "D"
       };
       setEntries([entry, ...entries]);
       setNewEntry('');
@@ -49,89 +45,66 @@ const Journal = () => {
   };
 
   return (
-    <section className="bg-white py-16">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Euer gemeinsames Journal</h2>
-          <p className="text-gray-600">Hier entstehen eure gemeinsamen Erinnerungen</p>
-        </div>
-
-        {/* Entry Input */}
-        <div className="bg-gradient-to-r from-orange-50 to-pink-50 rounded-2xl p-6 mb-8 border border-orange-100">
-          <div className="flex items-start space-x-4">
-            <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-medium">M</span>
+    <section className="bg-gray-900 py-8">
+      <div className="max-w-2xl mx-auto px-4">
+        {/* Entry Input - iOS Notes style */}
+        <div className="bg-gray-800 rounded-2xl p-4 mb-6 border border-gray-700">
+          <textarea
+            value={newEntry}
+            onChange={(e) => setNewEntry(e.target.value)}
+            placeholder="Was denkst du gerade..."
+            className="w-full bg-transparent text-white placeholder-gray-400 resize-none outline-none text-base leading-relaxed min-h-[80px]"
+          />
+          <div className="flex items-center justify-between mt-3">
+            <div className="flex space-x-4">
+              <button className="text-gray-400 hover:text-white transition-colors">
+                <Camera className="w-5 h-5" />
+              </button>
+              <button className="text-gray-400 hover:text-white transition-colors">
+                <Mic className="w-5 h-5" />
+              </button>
             </div>
-            <div className="flex-1">
-              <textarea
-                value={newEntry}
-                onChange={(e) => setNewEntry(e.target.value)}
-                placeholder="Was beschäftigt dich heute? Teile deine Gedanken..."
-                className="w-full bg-white rounded-xl p-4 border border-gray-200 focus:border-orange-300 focus:ring-2 focus:ring-orange-100 outline-none resize-none min-h-[100px]"
-              />
-              <div className="flex items-center justify-between mt-4">
-                <div className="flex space-x-3">
-                  <button className="flex items-center space-x-2 text-gray-600 hover:text-orange-500 transition-colors">
-                    <Camera className="w-4 h-4" />
-                    <span className="text-sm">Foto</span>
-                  </button>
-                  <button className="flex items-center space-x-2 text-gray-600 hover:text-orange-500 transition-colors">
-                    <Mic className="w-4 h-4" />
-                    <span className="text-sm">Audio</span>
-                  </button>
-                  <button className="flex items-center space-x-2 text-gray-600 hover:text-orange-500 transition-colors">
-                    <Tag className="w-4 h-4" />
-                    <span className="text-sm">Tag</span>
-                  </button>
-                </div>
-                <button
-                  onClick={addEntry}
-                  className="bg-gradient-to-r from-orange-400 to-pink-500 text-white px-6 py-2 rounded-full hover:from-orange-500 hover:to-pink-600 transition-all duration-300 font-medium flex items-center space-x-2"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Teilen</span>
-                </button>
-              </div>
-            </div>
+            <button
+              onClick={addEntry}
+              disabled={!newEntry.trim()}
+              className="bg-white text-gray-900 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Teilen
+            </button>
           </div>
         </div>
 
-        {/* Entries Timeline */}
-        <div className="space-y-6">
+        {/* Entries Timeline - Instagram style */}
+        <div className="space-y-4">
           {entries.map((entry) => (
-            <div key={entry.id} className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
-              <div className="flex items-start space-x-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
-                  <span className="text-white font-medium">{entry.author[0]}</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <span className="font-medium text-gray-900">{entry.author}</span>
-                    <span className="text-gray-500 text-sm">{entry.timestamp}</span>
-                    <span className="text-lg">{entry.mood}</span>
+            <div key={entry.id} className="bg-gray-800 rounded-2xl border border-gray-700 overflow-hidden">
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 pb-2">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                    <span className="text-white font-medium text-sm">{entry.avatar}</span>
                   </div>
-                  <p className="text-gray-700 mb-3 leading-relaxed">{entry.text}</p>
-                  <div className="flex items-center space-x-2">
-                    {entry.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="bg-gradient-to-r from-orange-100 to-pink-100 text-orange-700 px-3 py-1 rounded-full text-xs font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center space-x-4 mt-4 text-gray-500">
-                    <button className="flex items-center space-x-1 hover:text-pink-500 transition-colors">
-                      <Heart className="w-4 h-4" />
-                      <span className="text-sm">Gefällt mir</span>
-                    </button>
-                    <button className="flex items-center space-x-1 hover:text-blue-500 transition-colors">
-                      <Calendar className="w-4 h-4" />
-                      <span className="text-sm">Zu Meilenstein hinzufügen</span>
-                    </button>
+                  <div>
+                    <span className="font-medium text-white text-sm">{entry.author}</span>
+                    <span className="text-gray-400 text-xs ml-2">{entry.timestamp}</span>
                   </div>
                 </div>
+                <button className="text-gray-400 hover:text-white transition-colors">
+                  <MoreHorizontal className="w-4 h-4" />
+                </button>
+              </div>
+              
+              {/* Content */}
+              <div className="px-4 pb-2">
+                <p className="text-white text-base leading-relaxed">{entry.text}</p>
+              </div>
+              
+              {/* Actions */}
+              <div className="px-4 pb-4">
+                <button className="flex items-center space-x-1 text-gray-400 hover:text-red-400 transition-colors">
+                  <Heart className="w-4 h-4" />
+                  <span className="text-sm">Gefällt mir</span>
+                </button>
               </div>
             </div>
           ))}
