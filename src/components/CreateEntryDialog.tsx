@@ -65,7 +65,7 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl bg-background border-border text-foreground rounded-xl p-0 gap-0">
+      <DialogContent className="sm:max-w-2xl bg-card border-border text-card-foreground rounded-xl p-0 gap-0 shadow-lg">
         <div className="p-6 pb-4">
           <h2 className="text-xl font-semibold mb-6">Neuer Eintrag</h2>
           
@@ -75,12 +75,12 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
               <SelectTrigger className="bg-muted border-border text-foreground h-12 rounded-lg">
                 <SelectValue placeholder="Gruppe auswählen..." />
               </SelectTrigger>
-              <SelectContent className="bg-background border-border rounded-lg">
+              <SelectContent className="bg-popover border-border rounded-lg">
                 {groups.map((group) => (
                   <SelectItem 
                     key={group.id} 
                     value={group.id}
-                    className="text-foreground hover:bg-muted focus:bg-muted"
+                    className="text-popover-foreground hover:bg-accent focus:bg-accent"
                   >
                     <div className="flex items-center space-x-2">
                       <div className={`w-3 h-3 rounded-full ${group.color}`} />
