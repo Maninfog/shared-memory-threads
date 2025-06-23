@@ -1,6 +1,7 @@
 
+
 import { useState } from 'react';
-import { Home, Heart, Plus, MessageCircle, User } from 'lucide-react';
+import { Home, Plus, MessageCircle, User } from 'lucide-react';
 import ProfileSheet from './ProfileSheet';
 import CreateEntryDialog from './CreateEntryDialog';
 
@@ -31,10 +32,6 @@ const BottomNav = ({ onHomeClick, onCreateEntry }: BottomNavProps) => {
             </div>
           </button>
 
-          <button className="flex flex-col items-center justify-center p-2">
-            <Heart className="w-6 h-6 text-gray-400" />
-          </button>
-          
           <button 
             onClick={onHomeClick}
             className="flex flex-col items-center justify-center p-2"
@@ -66,3 +63,4 @@ const BottomNav = ({ onHomeClick, onCreateEntry }: BottomNavProps) => {
 };
 
 export default BottomNav;
+
