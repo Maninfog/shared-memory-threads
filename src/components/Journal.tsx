@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Camera, Mic, Heart, MoreHorizontal } from 'lucide-react';
+import { Plus, Camera, Mic, Heart, MoreHorizontal, MessageCircle } from 'lucide-react';
 
 interface JournalEntry {
   id: number;
@@ -99,10 +99,14 @@ const Journal = () => {
               </div>
               
               {/* Actions */}
-              <div className="px-4 pb-4">
+              <div className="px-4 pb-4 flex items-center space-x-6">
                 <button className="flex items-center space-x-1 text-gray-400 hover:text-red-400 transition-colors">
                   <Heart className="w-4 h-4" />
                   <span className="text-sm">Gefällt mir</span>
+                </button>
+                <button className="flex items-center space-x-1 text-gray-400 hover:text-blue-400 transition-colors">
+                  <MessageCircle className="w-4 h-4" />
+                  <span className="text-sm">Kommentieren</span>
                 </button>
               </div>
             </div>
