@@ -21,12 +21,11 @@ const Index = () => {
   };
 
   const handleChatClick = () => {
-    // Navigate to CreateEntry when chat icon is clicked
     navigate('/');
   };
 
   return (
-    <div className="min-h-screen pb-20 zen-gradient-primary">
+    <div className="min-h-screen pb-20 mineral-gradient-primary">
       {currentView === 'dashboard' ? (
         <Dashboard onGroupSelect={handleGroupSelect} />
       ) : (

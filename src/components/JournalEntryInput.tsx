@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface JournalEntryInputProps {
   onAddEntry: (text: string) => void;
@@ -26,25 +27,25 @@ const JournalEntryInput = ({
   };
 
   return (
-    <div className="sticky bottom-20 bg-black/95 backdrop-blur-sm border-t border-gray-800 p-4">
+    <div className="sticky bottom-20 bg-background/95 backdrop-blur-sm border-t border-mineral p-4 mineral-shadow-soft">
       <div className="max-w-2xl mx-auto flex items-center space-x-3">
         <div className="flex-1 relative">
           <textarea
             value={newEntry}
             onChange={(e) => setNewEntry(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="What's on your mind?"
-            className="w-full bg-gray-900 text-white placeholder-gray-400 border border-gray-700 rounded-2xl px-4 py-3 pr-12 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Was denkst du gerade?"
+            className="w-full mineral-input rounded-xl px-4 py-3 pr-12 resize-none focus:outline-none min-h-12 max-h-32"
             rows={1}
-            style={{ minHeight: '48px', maxHeight: '120px' }}
           />
-          <button
+          <Button
             onClick={handleSubmit}
             disabled={!newEntry.trim()}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 text-white rounded-full p-2 transition-colors"
+            size="icon"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 mineral-button-primary rounded-lg h-8 w-8"
           >
             <Send className="w-4 h-4" />
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -1,198 +1,112 @@
 
 import { useState } from 'react';
-import { ArrowUp, ArrowLeft, Sparkles } from 'lucide-react';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Plus, Users, Heart, Home, Briefcase } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { useJournalEntries } from '../hooks/useJournalEntries';
 import { useNavigate } from 'react-router-dom';
 import BottomNav from '@/components/BottomNav';
 
-interface CreateEntryProps {
-  onCreateEntry?: (entry: {
-    text: string;
-    group: string;
-    aiEnabled: boolean;
-  }) => void;
-}
-
-const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
+const CreateEntry = () => {
   const [entryText, setEntryText] = useState('');
-  const [selectedGroup, setSelectedGroup] = useState<string>('');
-  const [aiEnabled, setAiEnabled] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState('private');
+  const { addEntry } = useJournalEntries();
   const navigate = useNavigate();
 
-  const groups = [{
-    id: 'best-friend',
-    name: 'Beste Freundin',
-    color: 'bg-gradient-to-r from-pink-500 to-rose-400'
-  }, {
-    id: 'private',
-    name: 'Privat',
-    color: 'bg-gradient-to-r from-purple-500 to-violet-400'
-  }, {
-    id: 'family',
-    name: 'Familie',
-    color: 'bg-gradient-to-r from-blue-500 to-indigo-400'
-  }, {
-    id: 'work-colleagues',
-    name: 'Arbeitskollegen',
-    color: 'bg-gradient-to-r from-green-500 to-emerald-400'
-  }];
+  const groups = [
+    { id: 'private', name: 'Private', icon: Users, color: 'bg-primary' },
+    { id: 'best-friend', name: 'Best Friend', icon: Heart, color: 'bg-primary' },
+    { id: 'family', name: 'Family', icon: Home, color: 'bg-primary' },
+    { id: 'work-colleagues', name: 'Work', icon: Briefcase, color: 'bg-primary' }
+  ];
 
   const handleSubmit = () => {
-    if (entryText.trim() && selectedGroup) {
-      if (onCreateEntry) {
-        onCreateEntry({
-          text: entryText,
-          group: selectedGroup,
-          aiEnabled
-        });
-      }
-
-      // Reset form and navigate back
+    if (entryText.trim()) {
+      addEntry(entryText, selectedGroup);
       setEntryText('');
-      setSelectedGroup('');
-      setAiEnabled(false);
       navigate('/dashboard');
     }
   };
 
-  const handleCancel = () => {
-    setEntryText('');
-    setSelectedGroup('');
-    setAiEnabled(false);
+  const handleDashboardClick = () => {
     navigate('/dashboard');
-  };
-
-  const handleChatClick = () => {
-    navigate('/dashboard');
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit();
-    }
   };
 
   return (
-    <div className="flex flex-col h-screen zen-gradient-primary">
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-zen-soft">
-        <button 
-          onClick={handleCancel}
-          className="flex items-center space-x-2 text-zen-muted hover:text-zen-primary transition-colors"
-        >
-          <ArrowLeft className="w-5 h-5" />
-          <span>Back</span>
-        </button>
-        <h1 className="text-lg font-semibold text-zen-primary">Neuer Eintrag</h1>
-        <div className="w-16"></div>
-      </div>
-
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full pb-20">
-        {/* Center content when no messages */}
-        <div className="flex-1 flex items-center justify-center p-6">
-          <div className="text-center max-w-md">
-            <div className="w-16 h-16 zen-gradient-card rounded-full flex items-center justify-center mx-auto mb-4 zen-glow-violet">
-              <Sparkles className="w-8 h-8 text-zen-accent-violet" />
-            </div>
-            <h2 className="text-xl font-semibold text-zen-primary mb-2">
-              Teile deine Gedanken
-            </h2>
-            <p className="text-zen-muted">
-              Wähle eine Gruppe und beginne zu schreiben
-            </p>
-          </div>
+    <div className="min-h-screen mineral-gradient-primary">
+      <div className="mineral-container mineral-section">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-medium text-mineral-primary mb-2">
+            Neuer Eintrag
+          </h1>
+          <p className="text-mineral-secondary">
+            Teile deine Gedanken und Erlebnisse
+          </p>
         </div>
 
-        {/* Bottom Input Area */}
-        <div className="p-4 border-t border-zen-soft zen-gradient-secondary">
+        {/* Main Content */}
+        <div className="max-w-2xl mx-auto">
+          {/* Entry Input */}
+          <div className="mineral-card rounded-lg p-6 mb-6">
+            <Textarea
+              value={entryText}
+              onChange={(e) => setEntryText(e.target.value)}
+              placeholder="Was beschäftigt dich heute?"
+              className="min-h-32 resize-none border-0 bg-transparent text-mineral-primary placeholder:text-mineral-secondary focus:ring-0 text-base leading-relaxed"
+            />
+          </div>
+
           {/* Group Selection */}
-          <div className="mb-4">
-            <Select value={selectedGroup} onValueChange={setSelectedGroup}>
-              <SelectTrigger className="zen-gradient-card border-zen-soft text-zen-primary h-10 rounded-lg backdrop-blur-sm">
-                <SelectValue placeholder="Gruppe auswählen..." />
-              </SelectTrigger>
-              <SelectContent className="zen-gradient-card border-zen-soft rounded-lg backdrop-blur-xl">
-                {groups.map(group => (
-                  <SelectItem key={group.id} value={group.id} className="text-zen-primary hover:bg-white/5 focus:bg-white/5">
-                    <div className="flex items-center space-x-2">
-                      <div className={`w-3 h-3 rounded-full ${group.color}`} />
-                      <span>{group.name}</span>
+          <div className="mineral-card rounded-lg p-6 mb-8">
+            <h3 className="text-lg font-medium text-mineral-primary mb-4">
+              Gruppe auswählen
+            </h3>
+            <div className="grid grid-cols-2 gap-3">
+              {groups.map((group) => {
+                const IconComponent = group.icon;
+                const isSelected = selectedGroup === group.id;
+                
+                return (
+                  <button
+                    key={group.id}
+                    onClick={() => setSelectedGroup(group.id)}
+                    className={`p-4 rounded-lg border-2 transition-all duration-200 ${
+                      isSelected 
+                        ? 'border-primary bg-secondary mineral-shadow-medium' 
+                        : 'border-mineral bg-background mineral-hover'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className={`${group.color} p-2 rounded-lg`}>
+                        <IconComponent className="w-4 h-4 text-primary-foreground" />
+                      </div>
+                      <span className={`font-medium ${isSelected ? 'text-primary' : 'text-mineral-primary'}`}>
+                        {group.name}
+                      </span>
                     </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Input Area */}
-          <div className="relative">
-            <div className="flex items-end zen-gradient-card rounded-xl border border-zen-soft p-3 backdrop-blur-sm zen-glow-violet">
-              <textarea 
-                value={entryText} 
-                onChange={e => setEntryText(e.target.value)} 
-                onKeyPress={handleKeyPress} 
-                placeholder="Nachricht eingeben..." 
-                className="flex-1 bg-transparent text-zen-primary placeholder-zen-muted resize-none outline-none max-h-32 min-h-[24px]" 
-                rows={1}
-                style={{ height: 'auto' }}
-                onInput={(e) => {
-                  const target = e.target as HTMLTextAreaElement;
-                  target.style.height = 'auto';
-                  target.style.height = target.scrollHeight + 'px';
-                }}
-              />
-              
-              {/* Send Button */}
-              <button 
-                onClick={handleSubmit} 
-                disabled={!entryText.trim() || !selectedGroup} 
-                className="ml-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-gray-700 disabled:to-gray-600 text-white disabled:text-zen-muted rounded-lg p-2 transition-all disabled:cursor-not-allowed flex-shrink-0 zen-glow-violet"
-              >
-                <ArrowUp className="w-4 h-4" />
-              </button>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          {/* AI Toggle */}
-          <div className="flex items-center justify-between mt-3">
-            <div className="text-xs text-zen-muted">
-              {selectedGroup ? `Schreibt in: ${groups.find(g => g.id === selectedGroup)?.name}` : ''}
-            </div>
-            
-            <button 
-              onClick={() => setAiEnabled(!aiEnabled)} 
-              className={`flex items-center space-x-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                aiEnabled 
-                  ? 'bg-gradient-to-r from-purple-600 to-violet-600 text-zen-primary zen-glow-violet' 
-                  : 'zen-gradient-card text-zen-muted hover:bg-white/5 border border-zen-soft'
-              }`}
-            >
-              <Sparkles className="w-3 h-3" />
-              <span>Lumen</span>
-            </button>
-          </div>
-
-          {/* AI Info */}
-          {aiEnabled && (
-            <div className="mt-3 zen-gradient-card border border-purple-500/30 rounded-lg p-3 zen-glow-violet">
-              <div className="flex items-start space-x-2">
-                <Sparkles className="w-4 h-4 text-zen-accent-violet mt-0.5 flex-shrink-0" />
-                <div className="text-xs text-zen-secondary">
-                  <p className="font-medium mb-1 text-zen-accent-violet">Lumen-Journaling aktiviert</p>
-                  <p className="text-zen-muted">
-                    Lumen wird deinen Eintrag analysieren und dir Fragen basierend auf 
-                    deinen bisherigen Einträgen in dieser Gruppe stellen.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
+          {/* Submit Button */}
+          <Button
+            onClick={handleSubmit}
+            disabled={!entryText.trim()}
+            className="w-full mineral-button-primary py-3 text-base font-medium rounded-lg"
+          >
+            <Plus className="w-5 h-5 mr-2" />
+            Eintrag erstellen
+          </Button>
         </div>
       </div>
 
-      <BottomNav onChatClick={handleChatClick} />
+      <BottomNav 
+        onHomeClick={handleDashboardClick}
+        onChatClick={() => {}}
+      />
     </div>
   );
 };
