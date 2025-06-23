@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Plus, Camera, Mic, Sparkles } from 'lucide-react';
 import {
@@ -135,7 +134,7 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
               onClick={handleSubmit}
               disabled={!entryText.trim() || !selectedGroup}
               size="sm"
-              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-blue-500 hover:bg-blue-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Posten
             </Button>
