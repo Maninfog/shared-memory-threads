@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Home, Heart, Plus, MessageCircle, User } from 'lucide-react';
 import ProfileSheet from './ProfileSheet';
@@ -22,15 +21,15 @@ const BottomNav = ({ onHomeClick, onCreateEntry }: BottomNavProps) => {
     <>
       <nav className="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-sm border-t border-gray-800 z-50">
         <div className="flex items-center justify-around py-2 px-4 max-w-md mx-auto">
+          <button className="flex flex-col items-center justify-center p-2">
+            <Heart className="w-6 h-6 text-gray-400" />
+          </button>
+          
           <button 
             onClick={onHomeClick}
             className="flex flex-col items-center justify-center p-2"
           >
             <Home className="w-6 h-6 text-white" />
-          </button>
-          
-          <button className="flex flex-col items-center justify-center p-2">
-            <Heart className="w-6 h-6 text-gray-400" />
           </button>
           
           <button 
