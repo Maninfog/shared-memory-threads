@@ -65,22 +65,22 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl p-0 gap-0">
+      <DialogContent className="sm:max-w-2xl bg-background border-border text-foreground rounded-xl p-0 gap-0">
         <div className="p-6 pb-4">
           <h2 className="text-xl font-semibold mb-6">Neuer Eintrag</h2>
           
           {/* Group Selection */}
           <div className="mb-4">
             <Select value={selectedGroup} onValueChange={setSelectedGroup}>
-              <SelectTrigger className="bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white h-12 rounded-lg">
+              <SelectTrigger className="bg-muted border-border text-foreground h-12 rounded-lg">
                 <SelectValue placeholder="Gruppe auswählen..." />
               </SelectTrigger>
-              <SelectContent className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 rounded-lg">
+              <SelectContent className="bg-background border-border rounded-lg">
                 {groups.map((group) => (
                   <SelectItem 
                     key={group.id} 
                     value={group.id}
-                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 focus:bg-gray-100 dark:focus:bg-gray-600"
+                    className="text-foreground hover:bg-muted focus:bg-muted"
                   >
                     <div className="flex items-center space-x-2">
                       <div className={`w-3 h-3 rounded-full ${group.color}`} />
@@ -99,14 +99,14 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
               onChange={(e) => setEntryText(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Teile deine Gedanken..."
-              className="bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 min-h-[120px] resize-none rounded-lg pr-16 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="bg-muted border-border text-foreground placeholder-muted-foreground min-h-[120px] resize-none rounded-lg pr-16 focus:ring-2 focus:ring-ring focus:border-transparent"
             />
             
             {/* Send Button */}
             <button
               onClick={handleSubmit}
               disabled={!entryText.trim() || !selectedGroup}
-              className="absolute bottom-3 right-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white rounded-lg p-2 transition-colors disabled:cursor-not-allowed"
+              className="absolute bottom-3 right-3 bg-primary hover:bg-primary/90 disabled:bg-muted text-primary-foreground rounded-lg p-2 transition-colors disabled:cursor-not-allowed"
             >
               <ArrowUp className="w-4 h-4" />
             </button>
@@ -118,10 +118,10 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
           {/* Media and AI Controls */}
           <div className="flex items-center justify-between">
             <div className="flex space-x-2">
-              <button className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+              <button className="text-muted-foreground hover:text-foreground hover:bg-muted p-2 rounded-lg transition-colors">
                 <Camera className="w-5 h-5" />
               </button>
-              <button className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+              <button className="text-muted-foreground hover:text-foreground hover:bg-muted p-2 rounded-lg transition-colors">
                 <Mic className="w-5 h-5" />
               </button>
             </div>
@@ -131,7 +131,7 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 aiEnabled 
                   ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' 
-                  : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
               }`}
             >
               <Sparkles className="w-4 h-4" />
