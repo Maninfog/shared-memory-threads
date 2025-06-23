@@ -9,7 +9,10 @@ interface JournalEntryCardProps {
 
 const JournalEntryCard = ({ entry, showGroupBadge = false, groupNames }: JournalEntryCardProps) => {
   return (
-    <article className="border-b border-gray-800 p-4 hover:bg-gray-950/50 transition-colors cursor-pointer">
+    <article 
+      className="border-b border-gray-800 p-4 hover:bg-gray-950/50 transition-colors cursor-pointer"
+      data-entry-id={entry.id}
+    >
       <div className="flex space-x-3">
         {/* Avatar */}
         <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">

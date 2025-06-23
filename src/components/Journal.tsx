@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import JournalHeader from './JournalHeader';
 import JournalContent from './JournalContent';
@@ -16,6 +15,7 @@ interface JournalProps {
 const Journal = ({ selectedGroup, onBackToDashboard, pendingEntry, onEntryProcessed }: JournalProps) => {
   const { entries, addEntry } = useJournalEntries();
   const [showPostingAnimation, setShowPostingAnimation] = useState(false);
+  const [lastEntryId, setLastEntryId] = useState<number | null>(null);
 
   // Handle pending entry from the create dialog
   useEffect(() => {
@@ -39,11 +39,24 @@ const Journal = ({ selectedGroup, onBackToDashboard, pendingEntry, onEntryProces
   };
 
   const handleAddEntry = (text: string) => {
-    addEntry(text, selectedGroup);
+    const newEntry = addEntry(text, selectedGroup);
+    setLastEntryId(newEntry?.id || null);
     setShowPostingAnimation(true);
   };
 
   const handlePostingComplete = () => {
+    setShowPostingAnimation(false);
+    setLastEntryId(null);
+  };
+
+  const handleViewEntry = () => {
+    if (lastEntryId) {
+      // Scroll to the entry (we'll implement this by finding the entry element)
+      const entryElement = document.querySelector(`[data-entry-id="${lastEntryId}"]`);
+      if (entryElement) {
+        entryElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
     setShowPostingAnimation(false);
   };
 
@@ -63,6 +76,7 @@ const Journal = ({ selectedGroup, onBackToDashboard, pendingEntry, onEntryProces
         <PostingAnimation
           isVisible={showPostingAnimation}
           onComplete={handlePostingComplete}
+          onViewEntry={handleViewEntry}
         />
 
         <JournalContent

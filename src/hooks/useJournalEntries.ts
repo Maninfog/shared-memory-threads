@@ -20,7 +20,9 @@ export const useJournalEntries = () => {
         date: new Date()
       };
       setEntries([entry, ...entries]);
+      return entry; // Return the created entry
     }
+    return null;
   };
 
   return { entries, addEntry };
