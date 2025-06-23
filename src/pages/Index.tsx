@@ -20,8 +20,7 @@ const Index = () => {
 
   const handleChatClick = () => {
     // Navigate to dashboard when chat icon is clicked
-    setCurrentView('dashboard');
-    setSelectedGroup(undefined);
+    handleBackToDashboard();
   };
 
   return (
