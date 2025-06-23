@@ -1,6 +1,23 @@
-import { Heart, Lock, Users } from 'lucide-react';
+
+import { Heart, Lock, Users, Settings } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const Header = () => {
+  const handleExport = () => {
+    console.log('Export data clicked');
+    // Export functionality will be implemented here
+  };
+
+  const handleAddMember = () => {
+    console.log('Add member clicked');
+    // Add member functionality will be implemented here
+  };
+
   return (
     <header className="bg-black/95 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50">
       <div className="max-w-4xl mx-auto px-4 py-3">
@@ -23,9 +40,36 @@ const Header = () => {
             </div>
           </nav>
           
-          <button className="bg-white text-gray-900 px-4 py-1.5 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium">
-            Start
-          </button>
+          <div className="flex items-center space-x-3">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors">
+                  <Settings className="w-5 h-5 text-white" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent 
+                align="end" 
+                className="bg-gray-800 border-gray-700 min-w-[160px]"
+              >
+                <DropdownMenuItem 
+                  onClick={handleExport}
+                  className="text-white hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
+                >
+                  Export Data
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={handleAddMember}
+                  className="text-white hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
+                >
+                  Add Member
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            <button className="bg-white text-gray-900 px-4 py-1.5 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium">
+              Start
+            </button>
+          </div>
         </div>
       </div>
     </header>
