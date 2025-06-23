@@ -1,24 +1,12 @@
-
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-
-interface JournalEntry {
-  id: number;
-  text: string;
-  author: string;
-  timestamp: string;
-  avatar: string;
-  handle: string;
-  group: string;
-  groupColor: string;
-  date: Date;
-}
+import { JournalEntry, GroupNames } from '../types/JournalTypes';
 
 interface PreviousEntriesTimelineProps {
   entries: JournalEntry[];
   selectedGroup?: string;
-  groupNames: Record<string, string>;
+  groupNames: GroupNames;
 }
 
 const PreviousEntriesTimeline = ({ entries, selectedGroup, groupNames }: PreviousEntriesTimelineProps) => {

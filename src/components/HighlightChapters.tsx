@@ -1,14 +1,5 @@
-
 import { Card, CardContent } from '@/components/ui/card';
-
-interface HighlightChapter {
-  id: string;
-  title: string;
-  description: string;
-  icon: any;
-  color: string;
-  entryCount: number;
-}
+import { HighlightChapter } from '../types/JournalTypes';
 
 interface HighlightChaptersProps {
   chapters: HighlightChapter[];

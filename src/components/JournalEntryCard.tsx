@@ -1,21 +1,10 @@
-
 import { MoreHorizontal, MessageCircle, Heart } from 'lucide-react';
-
-interface JournalEntry {
-  id: number;
-  text: string;
-  author: string;
-  timestamp: string;
-  avatar: string;
-  handle: string;
-  group: string;
-  groupColor: string;
-}
+import { JournalEntry, GroupNames } from '../types/JournalTypes';
 
 interface JournalEntryCardProps {
   entry: JournalEntry;
   showGroupBadge?: boolean;
-  groupNames: Record<string, string>;
+  groupNames: GroupNames;
 }
 
 const JournalEntryCard = ({ entry, showGroupBadge = false, groupNames }: JournalEntryCardProps) => {

@@ -1,21 +1,9 @@
-
 import JournalEntryCard from './JournalEntryCard';
-
-interface JournalEntry {
-  id: number;
-  text: string;
-  author: string;
-  timestamp: string;
-  avatar: string;
-  handle: string;
-  group: string;
-  groupColor: string;
-  date: Date;
-}
+import { JournalEntry, GroupNames } from '../types/JournalTypes';
 
 interface MonthlyEntriesProps {
   entries: JournalEntry[];
-  groupNames: Record<string, string>;
+  groupNames: GroupNames;
   selectedGroup?: string;
 }
 
@@ -56,7 +44,7 @@ const MonthlyEntries = ({ entries, groupNames, selectedGroup }: MonthlyEntriesPr
         
         return (
           <div key={monthKey} className="mb-8">
-            <div className="sticky top-16 bg-black/80 backdrop-blur-sm border-b border-gray-800 py-3 px-4 mb-4">
+            <div className="sticky top-16 bg-black/800 backdrop-blur-sm border-b border-gray-800 py-3 px-4 mb-4">
               <h3 className="text-lg font-semibold text-white capitalize">
                 {label}
               </h3>

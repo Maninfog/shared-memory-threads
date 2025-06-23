@@ -1,21 +1,9 @@
-
 import { Clock, User } from 'lucide-react';
-
-interface JournalEntry {
-  id: number;
-  text: string;
-  author: string;
-  timestamp: string;
-  avatar: string;
-  handle: string;
-  group: string;
-  groupColor: string;
-  date: Date;
-}
+import { JournalEntry, GroupNames } from '../types/JournalTypes';
 
 interface NotesStyleEntriesProps {
   entries: JournalEntry[];
-  groupNames: Record<string, string>;
+  groupNames: GroupNames;
 }
 
 const NotesStyleEntries = ({ entries, groupNames }: NotesStyleEntriesProps) => {
