@@ -1,11 +1,9 @@
 
 import { useState } from 'react';
-import { Plus, Camera, Mic, Sparkles } from 'lucide-react';
+import { Plus, Camera, Mic, Sparkles, ArrowUp } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
 } from '@/components/ui/dialog';
 import {
   Select,
@@ -58,29 +56,31 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
     onOpenChange(false);
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-gray-900 border-gray-700 text-white rounded-3xl">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold">Neuer Eintrag</DialogTitle>
-        </DialogHeader>
-        
-        <div className="space-y-4">
+      <DialogContent className="sm:max-w-2xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl p-0 gap-0">
+        <div className="p-6 pb-4">
+          <h2 className="text-xl font-semibold mb-6">Neuer Eintrag</h2>
+          
           {/* Group Selection */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-300">
-              Gruppe auswählen
-            </label>
+          <div className="mb-4">
             <Select value={selectedGroup} onValueChange={setSelectedGroup}>
-              <SelectTrigger className="bg-gray-800 border-gray-600 text-white">
+              <SelectTrigger className="bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white h-12 rounded-lg">
                 <SelectValue placeholder="Gruppe auswählen..." />
               </SelectTrigger>
-              <SelectContent className="bg-gray-800 border-gray-600">
+              <SelectContent className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 rounded-lg">
                 {groups.map((group) => (
                   <SelectItem 
                     key={group.id} 
                     value={group.id}
-                    className="text-white hover:bg-gray-700 focus:bg-gray-700"
+                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 focus:bg-gray-100 dark:focus:bg-gray-600"
                   >
                     <div className="flex items-center space-x-2">
                       <div className={`w-3 h-3 rounded-full ${group.color}`} />
@@ -92,63 +92,61 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
             </Select>
           </div>
 
-          {/* Text Area */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-300">
-              Was passiert gerade?
-            </label>
+          {/* Text Input Area */}
+          <div className="relative">
             <Textarea
               value={entryText}
               onChange={(e) => setEntryText(e.target.value)}
+              onKeyPress={handleKeyPress}
               placeholder="Teile deine Gedanken..."
-              className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 min-h-[120px] resize-none"
+              className="bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 min-h-[120px] resize-none rounded-lg pr-16 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
-          </div>
-
-          {/* Media Buttons */}
-          <div className="flex space-x-4">
-            <button className="text-blue-400 hover:bg-blue-400/10 p-2 rounded-full transition-colors">
-              <Camera className="w-5 h-5" />
-            </button>
-            <button className="text-blue-400 hover:bg-blue-400/10 p-2 rounded-full transition-colors">
-              <Mic className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex justify-end space-x-2 pt-4">
-            <Button
-              onClick={() => setAiEnabled(!aiEnabled)}
-              variant={aiEnabled ? "default" : "outline"}
-              size="sm"
-              className={`${
-                aiEnabled 
-                  ? 'bg-purple-600 hover:bg-purple-700 text-white' 
-                  : 'bg-transparent border-gray-600 text-gray-300 hover:bg-gray-800'
-              }`}
-            >
-              <Sparkles className="w-4 h-4 mr-1" />
-              Lumen
-            </Button>
             
-            <Button
+            {/* Send Button */}
+            <button
               onClick={handleSubmit}
               disabled={!entryText.trim() || !selectedGroup}
-              size="sm"
-              className="bg-blue-500 hover:bg-blue-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+              className="absolute bottom-3 right-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white rounded-lg p-2 transition-colors disabled:cursor-not-allowed"
             >
-              Posten
-            </Button>
+              <ArrowUp className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="px-6 pb-6">
+          {/* Media and AI Controls */}
+          <div className="flex items-center justify-between">
+            <div className="flex space-x-2">
+              <button className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+                <Camera className="w-5 h-5" />
+              </button>
+              <button className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+                <Mic className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <button
+              onClick={() => setAiEnabled(!aiEnabled)}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                aiEnabled 
+                  ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' 
+                  : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+              }`}
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>Lumen</span>
+            </button>
           </div>
 
           {/* AI Info */}
           {aiEnabled && (
-            <div className="bg-purple-900/30 border border-purple-500/50 rounded-lg p-3 mt-4">
-              <div className="flex items-start space-x-2">
-                <Sparkles className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
-                <div className="text-sm text-purple-200">
+            <div className="bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-500/50 rounded-lg p-4 mt-4">
+              <div className="flex items-start space-x-3">
+                <Sparkles className="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
+                <div className="text-sm text-purple-800 dark:text-purple-200">
                   <p className="font-medium mb-1">Lumen-Journaling aktiviert</p>
-                  <p className="text-purple-300">
+                  <p className="text-purple-700 dark:text-purple-300">
                     Lumen wird deinen Eintrag analysieren und dir Fragen basierend auf 
                     deinen bisherigen Einträgen in dieser Gruppe stellen.
                   </p>
