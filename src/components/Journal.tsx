@@ -5,6 +5,7 @@ import JournalEntryInput from './JournalEntryInput';
 import HighlightChapters from './HighlightChapters';
 import MonthlyEntries from './MonthlyEntries';
 import PreviousEntriesTimeline from './PreviousEntriesTimeline';
+import NotesStyleEntries from './NotesStyleEntries';
 
 interface JournalEntry {
   id: number;
@@ -189,14 +190,20 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
               groupNames={groupNames}
             />
             <JournalEntryInput onAddEntry={addEntry} />
+            <NotesStyleEntries
+              entries={filteredEntries}
+              groupNames={groupNames}
+            />
           </>
         )}
 
-        <MonthlyEntries
-          entries={filteredEntries}
-          selectedGroup={selectedGroup}
-          groupNames={groupNames}
-        />
+        {!selectedGroup && (
+          <MonthlyEntries
+            entries={filteredEntries}
+            selectedGroup={selectedGroup}
+            groupNames={groupNames}
+          />
+        )}
       </div>
     </section>
   );
