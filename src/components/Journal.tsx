@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Plus, Camera, Mic, Heart, MoreHorizontal, MessageCircle, Repeat2, Share } from 'lucide-react';
+import { Plus, Camera, Mic, Heart, MoreHorizontal, MessageCircle } from 'lucide-react';
 
 interface JournalEntry {
   id: number;
@@ -9,6 +9,8 @@ interface JournalEntry {
   timestamp: string;
   avatar: string;
   handle: string;
+  group: string;
+  groupColor: string;
 }
 
 const Journal = () => {
@@ -19,7 +21,9 @@ const Journal = () => {
       author: "Mara",
       handle: "@mara_loves",
       timestamp: "2h",
-      avatar: "M"
+      avatar: "M",
+      group: "Familie",
+      groupColor: "bg-pink-500"
     },
     {
       id: 2,
@@ -27,21 +31,33 @@ const Journal = () => {
       author: "Alex",
       handle: "@alex_cooks",
       timestamp: "1h", 
-      avatar: "A"
+      avatar: "A",
+      group: "Freunde",
+      groupColor: "bg-blue-500"
     }
   ]);
 
   const [newEntry, setNewEntry] = useState('');
+  const [selectedGroup, setSelectedGroup] = useState('Familie');
+
+  const groups = [
+    { name: 'Familie', color: 'bg-pink-500' },
+    { name: 'Freunde', color: 'bg-blue-500' },
+    { name: 'Arbeit', color: 'bg-green-500' }
+  ];
 
   const addEntry = () => {
     if (newEntry.trim()) {
+      const selectedGroupData = groups.find(g => g.name === selectedGroup);
       const entry: JournalEntry = {
         id: entries.length + 1,
         text: newEntry,
         author: "Du",
         handle: "@you",
         timestamp: "jetzt",
-        avatar: "D"
+        avatar: "D",
+        group: selectedGroup,
+        groupColor: selectedGroupData?.color || 'bg-gray-500'
       };
       setEntries([entry, ...entries]);
       setNewEntry('');
@@ -63,6 +79,21 @@ const Journal = () => {
               <span className="text-white font-medium">D</span>
             </div>
             <div className="flex-1">
+              {/* Group Selector */}
+              <div className="mb-3">
+                <select
+                  value={selectedGroup}
+                  onChange={(e) => setSelectedGroup(e.target.value)}
+                  className="bg-gray-800 text-white px-3 py-1 rounded-full text-sm border border-gray-700 focus:outline-none focus:border-blue-500"
+                >
+                  {groups.map(group => (
+                    <option key={group.name} value={group.name}>
+                      {group.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
               <textarea
                 value={newEntry}
                 onChange={(e) => setNewEntry(e.target.value)}
@@ -108,6 +139,10 @@ const Journal = () => {
                     <span className="text-gray-500 text-sm">{entry.handle}</span>
                     <span className="text-gray-500 text-sm">·</span>
                     <span className="text-gray-500 text-sm hover:underline cursor-pointer">{entry.timestamp}</span>
+                    <span className="text-gray-500 text-sm">·</span>
+                    <span className={`${entry.groupColor} text-white text-xs px-2 py-1 rounded-full font-medium`}>
+                      {entry.group}
+                    </span>
                     <div className="ml-auto">
                       <button className="text-gray-500 hover:bg-gray-800 p-1.5 rounded-full transition-colors">
                         <MoreHorizontal className="w-4 h-4" />
@@ -121,24 +156,15 @@ const Journal = () => {
                   </div>
                   
                   {/* Actions */}
-                  <div className="flex items-center justify-between max-w-md">
+                  <div className="flex items-center space-x-8">
                     <button className="flex items-center space-x-2 text-gray-500 hover:text-blue-400 hover:bg-blue-400/10 px-3 py-1.5 rounded-full transition-colors group">
                       <MessageCircle className="w-4 h-4" />
                       <span className="text-sm">12</span>
                     </button>
                     
-                    <button className="flex items-center space-x-2 text-gray-500 hover:text-green-400 hover:bg-green-400/10 px-3 py-1.5 rounded-full transition-colors group">
-                      <Repeat2 className="w-4 h-4" />
-                      <span className="text-sm">3</span>
-                    </button>
-                    
                     <button className="flex items-center space-x-2 text-gray-500 hover:text-red-400 hover:bg-red-400/10 px-3 py-1.5 rounded-full transition-colors group">
                       <Heart className="w-4 h-4" />
                       <span className="text-sm">24</span>
-                    </button>
-                    
-                    <button className="flex items-center space-x-2 text-gray-500 hover:text-blue-400 hover:bg-blue-400/10 px-3 py-1.5 rounded-full transition-colors group">
-                      <Share className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
