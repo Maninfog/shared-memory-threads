@@ -1,8 +1,10 @@
-
+import { useState } from 'react';
 import JournalHeader from './JournalHeader';
 import JournalContent from './JournalContent';
+import AIFeedback from './AIFeedback';
 import { useJournalEntries } from '../hooks/useJournalEntries';
 import { groupNames } from '../data/journalData';
+import { generateAIFeedback } from '../utils/aiFeedback';
 
 interface JournalProps {
   selectedGroup?: string;
@@ -11,6 +13,8 @@ interface JournalProps {
 
 const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
   const { entries, addEntry } = useJournalEntries();
+  const [showAIFeedback, setShowAIFeedback] = useState(false);
+  const [aiFeedbackText, setAIFeedbackText] = useState('');
 
   const handleExport = () => {
     console.log('Gruppendaten exportieren geklickt');
@@ -26,6 +30,15 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
 
   const handleAddEntry = (text: string) => {
     addEntry(text, selectedGroup);
+    
+    // Generate and show AI feedback
+    const feedback = generateAIFeedback(text, selectedGroup);
+    setAIFeedbackText(feedback);
+    setShowAIFeedback(true);
+  };
+
+  const handleDismissFeedback = () => {
+    setShowAIFeedback(false);
   };
 
   const currentGroupName = selectedGroup ? groupNames[selectedGroup] : 'Home';
@@ -39,6 +52,12 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
           onBackToDashboard={onBackToDashboard}
           onExport={handleExport}
           onAddMember={handleAddMember}
+        />
+
+        <AIFeedback
+          isVisible={showAIFeedback}
+          onDismiss={handleDismissFeedback}
+          feedbackText={aiFeedbackText}
         />
 
         <JournalContent
