@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Plus, Camera, Mic, Heart, MoreHorizontal, MessageCircle } from 'lucide-react';
+import { Plus, Camera, Mic, Heart, MoreHorizontal, MessageCircle, ArrowLeft } from 'lucide-react';
 
 interface JournalEntry {
   id: number;
@@ -13,7 +13,12 @@ interface JournalEntry {
   groupColor: string;
 }
 
-const Journal = () => {
+interface JournalProps {
+  selectedGroup?: string;
+  onBackToDashboard: () => void;
+}
+
+const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
   const [entries, setEntries] = useState<JournalEntry[]>([
     {
       id: 1,
@@ -22,8 +27,8 @@ const Journal = () => {
       handle: "@mara_loves",
       timestamp: "2h",
       avatar: "M",
-      group: "Familie",
-      groupColor: "bg-pink-500"
+      group: "family",
+      groupColor: "bg-blue-500"
     },
     {
       id: 2,
@@ -32,23 +37,53 @@ const Journal = () => {
       handle: "@alex_cooks",
       timestamp: "1h", 
       avatar: "A",
-      group: "Freunde",
-      groupColor: "bg-blue-500"
+      group: "best-friend",
+      groupColor: "bg-pink-500"
+    },
+    {
+      id: 3,
+      text: "New project launch went great today! The team really pulled together.",
+      author: "Sarah",
+      handle: "@sarah_pm",
+      timestamp: "4h",
+      avatar: "S",
+      group: "work-colleagues",
+      groupColor: "bg-green-500"
+    },
+    {
+      id: 4,
+      text: "Sometimes I just need a moment to reflect on how grateful I am for everything in my life.",
+      author: "Du",
+      handle: "@you",
+      timestamp: "1d",
+      avatar: "D",
+      group: "private",
+      groupColor: "bg-purple-500"
     }
   ]);
 
   const [newEntry, setNewEntry] = useState('');
-  const [selectedGroup, setSelectedGroup] = useState('Familie');
 
-  const groups = [
-    { name: 'Familie', color: 'bg-pink-500' },
-    { name: 'Freunde', color: 'bg-blue-500' },
-    { name: 'Arbeit', color: 'bg-green-500' }
-  ];
+  const groupNames = {
+    'best-friend': 'Best Friend',
+    'private': 'Private',
+    'family': 'Family',
+    'work-colleagues': 'Work Colleagues'
+  };
+
+  const groupColors = {
+    'best-friend': 'bg-pink-500',
+    'private': 'bg-purple-500',
+    'family': 'bg-blue-500',
+    'work-colleagues': 'bg-green-500'
+  };
+
+  const filteredEntries = selectedGroup 
+    ? entries.filter(entry => entry.group === selectedGroup)
+    : entries;
 
   const addEntry = () => {
-    if (newEntry.trim()) {
-      const selectedGroupData = groups.find(g => g.name === selectedGroup);
+    if (newEntry.trim() && selectedGroup) {
       const entry: JournalEntry = {
         id: entries.length + 1,
         text: newEntry,
@@ -57,73 +92,70 @@ const Journal = () => {
         timestamp: "jetzt",
         avatar: "D",
         group: selectedGroup,
-        groupColor: selectedGroupData?.color || 'bg-gray-500'
+        groupColor: groupColors[selectedGroup as keyof typeof groupColors] || 'bg-gray-500'
       };
       setEntries([entry, ...entries]);
       setNewEntry('');
     }
   };
 
+  const currentGroupName = selectedGroup ? groupNames[selectedGroup as keyof typeof groupNames] : 'Home';
+
   return (
     <section className="bg-black min-h-screen">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="sticky top-0 bg-black/80 backdrop-blur-md border-b border-gray-800 p-4">
-          <h1 className="text-xl font-bold text-white">Home</h1>
-        </div>
-
-        {/* Entry Input */}
-        <div className="border-b border-gray-800 p-4">
-          <div className="flex space-x-3">
-            <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-medium">D</span>
-            </div>
-            <div className="flex-1">
-              {/* Group Selector */}
-              <div className="mb-3">
-                <select
-                  value={selectedGroup}
-                  onChange={(e) => setSelectedGroup(e.target.value)}
-                  className="bg-gray-800 text-white px-3 py-1 rounded-full text-sm border border-gray-700 focus:outline-none focus:border-blue-500"
-                >
-                  {groups.map(group => (
-                    <option key={group.name} value={group.name}>
-                      {group.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              <textarea
-                value={newEntry}
-                onChange={(e) => setNewEntry(e.target.value)}
-                placeholder="Was passiert gerade?"
-                className="w-full bg-transparent text-white placeholder-gray-500 resize-none outline-none text-xl leading-relaxed min-h-[120px]"
-              />
-              <div className="flex items-center justify-between mt-4">
-                <div className="flex space-x-4">
-                  <button className="text-blue-400 hover:bg-blue-400/10 p-2 rounded-full transition-colors">
-                    <Camera className="w-5 h-5" />
-                  </button>
-                  <button className="text-blue-400 hover:bg-blue-400/10 p-2 rounded-full transition-colors">
-                    <Mic className="w-5 h-5" />
-                  </button>
-                </div>
-                <button
-                  onClick={addEntry}
-                  disabled={!newEntry.trim()}
-                  className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition-colors font-bold disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Posten
-                </button>
-              </div>
-            </div>
+          <div className="flex items-center space-x-4">
+            <button 
+              onClick={onBackToDashboard}
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <h1 className="text-xl font-bold text-white">{currentGroupName}</h1>
           </div>
         </div>
 
+        {/* Entry Input - only show if a specific group is selected */}
+        {selectedGroup && (
+          <div className="border-b border-gray-800 p-4">
+            <div className="flex space-x-3">
+              <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white font-medium">D</span>
+              </div>
+              <div className="flex-1">
+                <textarea
+                  value={newEntry}
+                  onChange={(e) => setNewEntry(e.target.value)}
+                  placeholder="Was passiert gerade?"
+                  className="w-full bg-transparent text-white placeholder-gray-500 resize-none outline-none text-xl leading-relaxed min-h-[120px]"
+                />
+                <div className="flex items-center justify-between mt-4">
+                  <div className="flex space-x-4">
+                    <button className="text-blue-400 hover:bg-blue-400/10 p-2 rounded-full transition-colors">
+                      <Camera className="w-5 h-5" />
+                    </button>
+                    <button className="text-blue-400 hover:bg-blue-400/10 p-2 rounded-full transition-colors">
+                      <Mic className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <button
+                    onClick={addEntry}
+                    disabled={!newEntry.trim()}
+                    className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition-colors font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Posten
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Entries Timeline */}
         <div>
-          {entries.map((entry) => (
+          {filteredEntries.map((entry) => (
             <article key={entry.id} className="border-b border-gray-800 p-4 hover:bg-gray-950/50 transition-colors cursor-pointer">
               <div className="flex space-x-3">
                 {/* Avatar */}
@@ -139,10 +171,14 @@ const Journal = () => {
                     <span className="text-gray-500 text-sm">{entry.handle}</span>
                     <span className="text-gray-500 text-sm">·</span>
                     <span className="text-gray-500 text-sm hover:underline cursor-pointer">{entry.timestamp}</span>
-                    <span className="text-gray-500 text-sm">·</span>
-                    <span className={`${entry.groupColor} text-white text-xs px-2 py-1 rounded-full font-medium`}>
-                      {entry.group}
-                    </span>
+                    {!selectedGroup && (
+                      <>
+                        <span className="text-gray-500 text-sm">·</span>
+                        <span className={`${entry.groupColor} text-white text-xs px-2 py-1 rounded-full font-medium`}>
+                          {groupNames[entry.group as keyof typeof groupNames]}
+                        </span>
+                      </>
+                    )}
                     <div className="ml-auto">
                       <button className="text-gray-500 hover:bg-gray-800 p-1.5 rounded-full transition-colors">
                         <MoreHorizontal className="w-4 h-4" />
