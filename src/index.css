@@ -106,15 +106,100 @@
   }
   
   .glass-effect {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
   
   .gradient-text {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f97316 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Zen-inspired gradient backgrounds */
+  .zen-gradient-primary {
+    background: linear-gradient(135deg, 
+      #0f0f0f 0%,
+      #1a1a1a 25%,
+      #262626 50%,
+      #1a1a1a 75%,
+      #0f0f0f 100%);
+  }
+
+  .zen-gradient-secondary {
+    background: linear-gradient(145deg,
+      #1a1a1a 0%,
+      #2d1b3d 30%,
+      #1f1f2e 70%,
+      #1a1a1a 100%);
+  }
+
+  .zen-gradient-warm {
+    background: linear-gradient(160deg,
+      #1a1a1a 0%,
+      #2d1f2f 25%,
+      #3d2a2a 50%,
+      #2d1f2f 75%,
+      #1a1a1a 100%);
+  }
+
+  .zen-gradient-card {
+    background: linear-gradient(145deg,
+      rgba(26, 26, 26, 0.8) 0%,
+      rgba(45, 27, 61, 0.3) 30%,
+      rgba(31, 31, 46, 0.3) 70%,
+      rgba(26, 26, 26, 0.8) 100%);
+  }
+
+  /* Soft glow effects */
+  .zen-glow-violet {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.1), 
+                0 0 40px rgba(168, 85, 247, 0.05);
+  }
+
+  .zen-glow-rose {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.1), 
+                0 0 40px rgba(236, 72, 153, 0.05);
+  }
+
+  .zen-glow-peach {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.1), 
+                0 0 40px rgba(249, 115, 22, 0.05);
+  }
+
+  /* Text colors for zen theme */
+  .text-zen-primary {
+    color: #f5f5f5;
+  }
+
+  .text-zen-secondary {
+    color: #d1d5db;
+  }
+
+  .text-zen-muted {
+    color: #9ca3af;
+  }
+
+  .text-zen-accent-violet {
+    color: #c084fc;
+  }
+
+  .text-zen-accent-rose {
+    color: #f472b6;
+  }
+
+  .text-zen-accent-peach {
+    color: #fb923c;
+  }
+
+  /* Border colors */
+  .border-zen-soft {
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .border-zen-accent {
+    border-color: rgba(168, 85, 247, 0.2);
   }
 }

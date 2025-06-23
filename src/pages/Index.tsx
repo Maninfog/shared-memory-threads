@@ -26,7 +26,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen pb-20 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+    <div className="min-h-screen pb-20 zen-gradient-primary">
       {currentView === 'dashboard' ? (
         <Dashboard onGroupSelect={handleGroupSelect} />
       ) : (
