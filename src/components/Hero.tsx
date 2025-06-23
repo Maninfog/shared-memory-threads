@@ -1,9 +1,8 @@
-
 import { Heart, MessageCircle, Shield } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="bg-gray-900 py-16 px-4">
+    <section className="bg-black py-16 px-4">
       <div className="max-w-3xl mx-auto text-center">
         <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
@@ -23,13 +22,13 @@ const Hero = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+          <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">
             <MessageCircle className="w-8 h-8 text-gray-400 mb-3" />
             <h3 className="font-medium text-white mb-2">Gemeinsam schreiben</h3>
             <p className="text-gray-400 text-sm">Wie in Notes, aber synchron mit der Person, die dir wichtig ist</p>
           </div>
           
-          <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+          <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">
             <Shield className="w-8 h-8 text-gray-400 mb-3" />
             <h3 className="font-medium text-white mb-2">Komplett privat</h3>
             <p className="text-gray-400 text-sm">Ende-zu-Ende verschlüsselt – nur ihr könnt eure Gedanken sehen</p>

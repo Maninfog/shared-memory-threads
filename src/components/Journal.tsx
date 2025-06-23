@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Plus, Camera, Mic, Heart, MoreHorizontal } from 'lucide-react';
 
@@ -45,10 +44,10 @@ const Journal = () => {
   };
 
   return (
-    <section className="bg-gray-900 py-8">
+    <section className="bg-black py-8">
       <div className="max-w-2xl mx-auto px-4">
         {/* Entry Input - iOS Notes style */}
-        <div className="bg-gray-800 rounded-2xl p-4 mb-6 border border-gray-700">
+        <div className="bg-gray-900 rounded-2xl p-4 mb-6 border border-gray-800">
           <textarea
             value={newEntry}
             onChange={(e) => setNewEntry(e.target.value)}
@@ -77,7 +76,7 @@ const Journal = () => {
         {/* Entries Timeline - Instagram style */}
         <div className="space-y-4">
           {entries.map((entry) => (
-            <div key={entry.id} className="bg-gray-800 rounded-2xl border border-gray-700 overflow-hidden">
+            <div key={entry.id} className="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden">
               {/* Header */}
               <div className="flex items-center justify-between p-4 pb-2">
                 <div className="flex items-center space-x-3">
