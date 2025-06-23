@@ -1,6 +1,5 @@
 
 import Journal from '@/components/Journal';
-import Features from '@/components/Features';
 import Testimonials from '@/components/Testimonials';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
@@ -10,7 +9,6 @@ const Index = () => {
   return (
     <div className="min-h-screen pb-20">
       <Journal />
-      <Features />
       <Testimonials />
       <CTA />
       <Footer />
