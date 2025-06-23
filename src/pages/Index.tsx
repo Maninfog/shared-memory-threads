@@ -36,7 +36,7 @@ const Index = () => {
           onBackToDashboard={handleBackToDashboard} 
         />
       )}
-      <BottomNav />
+      <BottomNav onHomeClick={handleBackToDashboard} />
     </div>
   );
 };

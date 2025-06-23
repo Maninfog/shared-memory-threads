@@ -1,11 +1,18 @@
 
 import { Home, Heart, Plus, MessageCircle, User } from 'lucide-react';
 
-const BottomNav = () => {
+interface BottomNavProps {
+  onHomeClick?: () => void;
+}
+
+const BottomNav = ({ onHomeClick }: BottomNavProps) => {
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-sm border-t border-gray-800 z-50">
       <div className="flex items-center justify-around py-2 px-4 max-w-md mx-auto">
-        <button className="flex flex-col items-center justify-center p-2">
+        <button 
+          onClick={onHomeClick}
+          className="flex flex-col items-center justify-center p-2"
+        >
           <Home className="w-6 h-6 text-white" />
         </button>
         
