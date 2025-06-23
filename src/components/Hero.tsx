@@ -1,22 +1,30 @@
+
 import { Heart, MessageCircle, Shield } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="bg-black py-16 px-4">
+    <section className="bg-black py-8 px-4">
       <div className="max-w-3xl mx-auto text-center">
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
+        <div className="mb-6">
+          <div className="flex items-center justify-center space-x-2 mb-6">
+            <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-pink-500 rounded-lg flex items-center justify-center">
+              <Heart className="w-5 h-5 text-white" />
+            </div>
+            <span className="font-medium text-2xl text-white">Lumen</span>
+          </div>
+          
+          <h1 className="text-3xl md:text-4xl font-semibold text-white mb-4 leading-tight">
             Euer privates<br />
             <span className="text-gray-400">Gedächtnis</span>
           </h1>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed">
             Wie iOS Notes, aber für zwei. Sammelt eure Momente, 
             Gedanken und Erinnerungen an einem sicheren Ort.
           </p>
         </div>
 
-        <div className="flex justify-center mb-12">
-          <button className="bg-white text-gray-900 px-8 py-3 rounded-xl hover:bg-gray-100 transition-colors font-medium">
+        <div className="flex justify-center mb-8">
+          <button className="bg-white text-gray-900 px-6 py-2.5 rounded-xl hover:bg-gray-100 transition-colors font-medium">
             Kostenfrei starten
           </button>
         </div>
