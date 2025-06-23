@@ -15,11 +15,19 @@ const BottomNav = ({ onHomeClick, onChatClick }: BottomNavProps) => {
     navigate('/create');
   };
 
+  const handleHomeClick = () => {
+    if (onHomeClick) {
+      onHomeClick();
+    } else {
+      navigate('/home');
+    }
+  };
+
   const handleChatClick = () => {
     if (onChatClick) {
       onChatClick();
     } else {
-      navigate('/');
+      navigate('/dashboard');
     }
   };
 
@@ -36,7 +44,7 @@ const BottomNav = ({ onHomeClick, onChatClick }: BottomNavProps) => {
         </button>
 
         <button 
-          onClick={onHomeClick}
+          onClick={handleHomeClick}
           className="flex flex-col items-center justify-center p-2"
         >
           <Home className="w-6 h-6 text-white" />
