@@ -69,17 +69,17 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-white dark:bg-gray-900">
+    <div className="flex flex-col h-screen bg-black">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+      <div className="flex items-center justify-between p-4 border-b border-gray-800">
         <button 
           onClick={handleCancel}
-          className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+          className="flex items-center space-x-2 text-gray-400 hover:text-white"
         >
           <ArrowLeft className="w-5 h-5" />
           <span>Back</span>
         </button>
-        <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Neuer Eintrag</h1>
+        <h1 className="text-lg font-semibold text-white">Neuer Eintrag</h1>
         <div className="w-16"></div>
       </div>
 
@@ -88,29 +88,29 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
         {/* Center content when no messages */}
         <div className="flex-1 flex items-center justify-center p-6">
           <div className="text-center max-w-md">
-            <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Sparkles className="w-8 h-8 text-gray-600 dark:text-gray-400" />
+            <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Sparkles className="w-8 h-8 text-gray-400" />
             </div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            <h2 className="text-xl font-semibold text-white mb-2">
               Teile deine Gedanken
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-400">
               Wähle eine Gruppe und beginne zu schreiben
             </p>
           </div>
         </div>
 
         {/* Bottom Input Area */}
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+        <div className="p-4 border-t border-gray-800 bg-black">
           {/* Group Selection */}
           <div className="mb-4">
             <Select value={selectedGroup} onValueChange={setSelectedGroup}>
-              <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 h-10 rounded-lg">
+              <SelectTrigger className="bg-gray-900 border-gray-700 text-white h-10 rounded-lg">
                 <SelectValue placeholder="Gruppe auswählen..." />
               </SelectTrigger>
-              <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-lg">
+              <SelectContent className="bg-gray-900 border-gray-700 rounded-lg">
                 {groups.map(group => (
-                  <SelectItem key={group.id} value={group.id} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700">
+                  <SelectItem key={group.id} value={group.id} className="text-white hover:bg-gray-800 focus:bg-gray-800">
                     <div className="flex items-center space-x-2">
                       <div className={`w-3 h-3 rounded-full ${group.color}`} />
                       <span>{group.name}</span>
@@ -123,13 +123,13 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
 
           {/* Input Area */}
           <div className="relative">
-            <div className="flex items-end bg-gray-100 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3">
+            <div className="flex items-end bg-gray-900 rounded-xl border border-gray-700 p-3">
               <textarea 
                 value={entryText} 
                 onChange={e => setEntryText(e.target.value)} 
                 onKeyPress={handleKeyPress} 
                 placeholder="Nachricht eingeben..." 
-                className="flex-1 bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 resize-none outline-none max-h-32 min-h-[24px]" 
+                className="flex-1 bg-transparent text-white placeholder-gray-400 resize-none outline-none max-h-32 min-h-[24px]" 
                 rows={1}
                 style={{ height: 'auto' }}
                 onInput={(e) => {
@@ -143,7 +143,7 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
               <button 
                 onClick={handleSubmit} 
                 disabled={!entryText.trim() || !selectedGroup} 
-                className="ml-2 bg-gray-900 dark:bg-gray-100 hover:bg-gray-700 dark:hover:bg-gray-300 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white dark:text-gray-900 disabled:text-gray-500 dark:disabled:text-gray-400 rounded-lg p-2 transition-colors disabled:cursor-not-allowed flex-shrink-0"
+                className="ml-2 bg-white hover:bg-gray-200 disabled:bg-gray-700 text-black disabled:text-gray-400 rounded-lg p-2 transition-colors disabled:cursor-not-allowed flex-shrink-0"
               >
                 <ArrowUp className="w-4 h-4" />
               </button>
@@ -152,7 +152,7 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
 
           {/* AI Toggle */}
           <div className="flex items-center justify-between mt-3">
-            <div className="text-xs text-gray-500 dark:text-gray-400">
+            <div className="text-xs text-gray-400">
               {selectedGroup ? `Schreibt in: ${groups.find(g => g.id === selectedGroup)?.name}` : ''}
             </div>
             
@@ -160,8 +160,8 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
               onClick={() => setAiEnabled(!aiEnabled)} 
               className={`flex items-center space-x-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                 aiEnabled 
-                  ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' 
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
+                  ? 'bg-purple-900 text-purple-300' 
+                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
               }`}
             >
               <Sparkles className="w-3 h-3" />
@@ -171,12 +171,12 @@ const CreateEntry = ({ onCreateEntry }: CreateEntryProps) => {
 
           {/* AI Info */}
           {aiEnabled && (
-            <div className="mt-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-500/50 rounded-lg p-3">
+            <div className="mt-3 bg-purple-900/30 border border-purple-500/50 rounded-lg p-3">
               <div className="flex items-start space-x-2">
-                <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
-                <div className="text-xs text-purple-800 dark:text-purple-200">
+                <Sparkles className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                <div className="text-xs text-purple-200">
                   <p className="font-medium mb-1">Lumen-Journaling aktiviert</p>
-                  <p className="text-purple-700 dark:text-purple-300">
+                  <p className="text-purple-300">
                     Lumen wird deinen Eintrag analysieren und dir Fragen basierend auf 
                     deinen bisherigen Einträgen in dieser Gruppe stellen.
                   </p>
