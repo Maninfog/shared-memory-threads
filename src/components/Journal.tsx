@@ -1,4 +1,5 @@
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import JournalHeader from './JournalHeader';
 import JournalContent from './JournalContent';
 import AIFeedback from './AIFeedback';
@@ -9,12 +10,22 @@ import { generateAIFeedback } from '../utils/aiFeedback';
 interface JournalProps {
   selectedGroup?: string;
   onBackToDashboard: () => void;
+  pendingEntry?: string | null;
+  onEntryProcessed?: () => void;
 }
 
-const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
+const Journal = ({ selectedGroup, onBackToDashboard, pendingEntry, onEntryProcessed }: JournalProps) => {
   const { entries, addEntry } = useJournalEntries();
   const [showAIFeedback, setShowAIFeedback] = useState(false);
   const [aiFeedbackText, setAIFeedbackText] = useState('');
+
+  // Handle pending entry from the create dialog
+  useEffect(() => {
+    if (pendingEntry && selectedGroup) {
+      handleAddEntry(pendingEntry);
+      onEntryProcessed?.();
+    }
+  }, [pendingEntry, selectedGroup]);
 
   const handleExport = () => {
     console.log('Gruppendaten exportieren geklickt');
