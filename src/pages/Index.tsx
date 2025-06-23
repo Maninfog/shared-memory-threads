@@ -19,9 +19,9 @@ const Index = () => {
   };
 
   const handleChatClick = () => {
-    // Show the private group when chat icon is clicked
-    setSelectedGroup('private');
-    setCurrentView('group');
+    // Navigate to dashboard when chat icon is clicked
+    setCurrentView('dashboard');
+    setSelectedGroup(undefined);
   };
 
   return (
