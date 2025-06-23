@@ -18,6 +18,12 @@ const Index = () => {
     setSelectedGroup(undefined);
   };
 
+  const handleChatClick = () => {
+    // Show the private group when chat icon is clicked
+    setSelectedGroup('private');
+    setCurrentView('group');
+  };
+
   return (
     <div className="min-h-screen pb-20 bg-black">
       {currentView === 'dashboard' ? (
@@ -30,6 +36,7 @@ const Index = () => {
       )}
       <BottomNav 
         onHomeClick={handleBackToDashboard}
+        onChatClick={handleChatClick}
       />
     </div>
   );

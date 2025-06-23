@@ -5,13 +5,20 @@ import ProfileSheet from './ProfileSheet';
 
 interface BottomNavProps {
   onHomeClick?: () => void;
+  onChatClick?: () => void;
 }
 
-const BottomNav = ({ onHomeClick }: BottomNavProps) => {
+const BottomNav = ({ onHomeClick, onChatClick }: BottomNavProps) => {
   const navigate = useNavigate();
 
   const handleCreateClick = () => {
     navigate('/create');
+  };
+
+  const handleChatClick = () => {
+    if (onChatClick) {
+      onChatClick();
+    }
   };
 
   return (
@@ -33,7 +40,10 @@ const BottomNav = ({ onHomeClick }: BottomNavProps) => {
           <Home className="w-6 h-6 text-white" />
         </button>
         
-        <button className="flex flex-col items-center justify-center p-2">
+        <button 
+          onClick={handleChatClick}
+          className="flex flex-col items-center justify-center p-2"
+        >
           <MessageCircle className="w-6 h-6 text-gray-400" />
         </button>
         
