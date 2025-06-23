@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Plus, Camera, Mic, Sparkles } from 'lucide-react';
 import {
@@ -115,7 +116,7 @@ const CreateEntryDialog = ({ open, onOpenChange, onCreateEntry }: CreateEntryDia
           </div>
 
           {/* Action Buttons */}
-          <div className="flex space-x-2 pt-4">
+          <div className="flex justify-end space-x-2 pt-4">
             <Button
               onClick={() => setAiEnabled(!aiEnabled)}
               variant={aiEnabled ? "default" : "outline"}
