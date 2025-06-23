@@ -9,12 +9,12 @@ import {
 
 const Header = () => {
   const handleExport = () => {
-    console.log('Export data clicked');
+    console.log('Daten exportieren geklickt');
     // Export functionality will be implemented here
   };
 
   const handleAddMember = () => {
-    console.log('Add member clicked');
+    console.log('Mitglied hinzufügen geklickt');
     // Add member functionality will be implemented here
   };
 
@@ -55,19 +55,19 @@ const Header = () => {
                   onClick={handleExport}
                   className="text-white hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
                 >
-                  Export Data
+                  Daten exportieren
                 </DropdownMenuItem>
                 <DropdownMenuItem 
                   onClick={handleAddMember}
                   className="text-white hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
                 >
-                  Add Member
+                  Mitglied hinzufügen
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             
             <button className="bg-white text-gray-900 px-4 py-1.5 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium">
-              Start
+              Starten
             </button>
           </div>
         </div>

@@ -32,53 +32,53 @@ const ProfileSheet = ({ children }: ProfileSheetProps) => {
   const menuItems = [
     {
       icon: User,
-      title: "Profile Edit",
-      description: "Update your personal information",
+      title: "Profil bearbeiten",
+      description: "Persönliche Informationen aktualisieren",
     },
     {
       icon: Shield,
-      title: "Privacy Settings",
-      description: "Control your privacy and visibility",
+      title: "Datenschutz-Einstellungen",
+      description: "Privatsphäre und Sichtbarkeit kontrollieren",
     },
     {
       icon: Crown,
-      title: "Membership",
-      description: "Manage your subscription",
+      title: "Mitgliedschaft",
+      description: "Abonnement verwalten",
     },
     {
       icon: Bell,
-      title: "Notifications",
-      description: "Configure your alerts",
+      title: "Benachrichtigungen",
+      description: "Benachrichtigungen konfigurieren",
     },
     {
       icon: Database,
-      title: "Data & Backup",
-      description: "Export and backup your journals",
+      title: "Daten & Backup",
+      description: "Tagebücher exportieren und sichern",
     },
     {
       icon: Lock,
-      title: "Security",
-      description: "Two-factor auth and login history",
+      title: "Sicherheit",
+      description: "Zwei-Faktor-Auth und Login-Verlauf",
     },
     {
       icon: Users,
-      title: "Group Management",
-      description: "Create and manage your groups",
+      title: "Gruppenverwaltung",
+      description: "Gruppen erstellen und verwalten",
     },
     {
       icon: Palette,
-      title: "Theme & Display",
-      description: "Customize your app appearance",
+      title: "Design & Anzeige",
+      description: "App-Erscheinungsbild anpassen",
     },
     {
       icon: HelpCircle,
-      title: "Support & Help",
-      description: "Get help and contact support",
+      title: "Support & Hilfe",
+      description: "Hilfe erhalten und Support kontaktieren",
     },
     {
       icon: Info,
-      title: "About",
-      description: "App info and legal documents",
+      title: "Über",
+      description: "App-Informationen und rechtliche Dokumente",
     },
   ];
 
@@ -89,7 +89,7 @@ const ProfileSheet = ({ children }: ProfileSheetProps) => {
       </SheetTrigger>
       <SheetContent side="bottom" className="bg-gray-900 border-gray-800 max-h-[80vh]">
         <SheetHeader className="mb-6">
-          <SheetTitle className="text-white text-xl">Profile Settings</SheetTitle>
+          <SheetTitle className="text-white text-xl">Profil-Einstellungen</SheetTitle>
         </SheetHeader>
         
         <div className="space-y-2 overflow-y-auto">
@@ -100,7 +100,7 @@ const ProfileSheet = ({ children }: ProfileSheetProps) => {
                 key={item.title}
                 className="w-full flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
                 onClick={() => {
-                  console.log(`Clicked: ${item.title}`);
+                  console.log(`Geklickt: ${item.title}`);
                   // Handle navigation here
                 }}
               >

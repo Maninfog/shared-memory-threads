@@ -70,10 +70,10 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
   const [newEntry, setNewEntry] = useState('');
 
   const groupNames = {
-    'best-friend': 'Best Friend',
-    'private': 'Private',
-    'family': 'Family',
-    'work-colleagues': 'Work Colleagues'
+    'best-friend': 'Beste Freundin',
+    'private': 'Privat',
+    'family': 'Familie',
+    'work-colleagues': 'Arbeitskollegen'
   };
 
   const groupColors = {
@@ -88,12 +88,12 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
     : entries;
 
   const handleExport = () => {
-    console.log('Export group data clicked');
+    console.log('Gruppendaten exportieren geklickt');
     // Export functionality will be implemented here
   };
 
   const handleAddMember = () => {
-    console.log('Add member to group clicked');
+    console.log('Mitglied hinzufügen geklickt');
     // Add member functionality will be implemented here
   };
 
@@ -147,13 +147,13 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
                     onClick={handleExport}
                     className="text-white hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
                   >
-                    Export Data
+                    Daten exportieren
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={handleAddMember}
                     className="text-white hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
                   >
-                    Add Member
+                    Mitglied hinzufügen
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
