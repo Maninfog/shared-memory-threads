@@ -1,4 +1,3 @@
-
 import { Plus, Users, Heart, Home as HomeIcon, Briefcase, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import BottomNav from '@/components/BottomNav';
@@ -8,11 +7,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleDashboardClick = () => {
-    navigate('/dashboard');
+    navigate('/groups');
   };
 
   const handleChatClick = () => {
-    navigate('/dashboard');
+    navigate('/groups');
   };
 
   const quickStats = [

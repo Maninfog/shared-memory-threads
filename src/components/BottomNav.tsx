@@ -1,4 +1,3 @@
-
 import { Plus, Home, MessageCircle, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ProfileSheet from './ProfileSheet';
@@ -27,7 +26,7 @@ const BottomNav = ({ onHomeClick, onChatClick }: BottomNavProps) => {
     if (onChatClick) {
       onChatClick();
     } else {
-      navigate('/dashboard');
+      navigate('/groups');
     }
   };
 

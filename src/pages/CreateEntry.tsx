@@ -37,11 +37,11 @@ const CreateEntry = () => {
     if (entryText.trim()) {
       addEntry(entryText, selectedGroup);
       setEntryText('');
-      navigate('/dashboard');
+      navigate('/groups');
     }
   };
   const handleDashboardClick = () => {
-    navigate('/dashboard');
+    navigate('/groups');
   };
   return <div className="min-h-screen mineral-gradient-primary">
       <div className="mineral-container mineral-section">

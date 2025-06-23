@@ -60,7 +60,7 @@ const Dashboard = ({ onGroupSelect }: DashboardProps) => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-medium text-mineral-primary mb-2">
-            Dashboard
+            Home
           </h1>
           <p className="text-mineral-secondary">
             Deine Journal-Gruppen im Überblick
