@@ -1,10 +1,10 @@
-
 import { useState } from 'react';
 import { Star, Heart, Sparkles } from 'lucide-react';
 import JournalHeader from './JournalHeader';
 import JournalEntryInput from './JournalEntryInput';
 import HighlightChapters from './HighlightChapters';
 import MonthlyEntries from './MonthlyEntries';
+import PreviousEntriesTimeline from './PreviousEntriesTimeline';
 
 interface JournalEntry {
   id: number;
@@ -182,7 +182,14 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
         )}
 
         {selectedGroup && (
-          <JournalEntryInput onAddEntry={addEntry} />
+          <>
+            <PreviousEntriesTimeline
+              entries={filteredEntries}
+              selectedGroup={selectedGroup}
+              groupNames={groupNames}
+            />
+            <JournalEntryInput onAddEntry={addEntry} />
+          </>
         )}
 
         <MonthlyEntries
