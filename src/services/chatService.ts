@@ -61,13 +61,13 @@ export class ChatService {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Simple response logic for demo purposes
+    // German response logic for demo purposes
     const responses = [
-      "That's really interesting. Can you tell me more about how that made you feel?",
-      "I understand. It sounds like this is something that's been on your mind lately.",
-      "Thank you for sharing that with me. What do you think might help in this situation?",
-      "That's a thoughtful observation. How do you usually handle situations like this?",
-      "I can see why that would be important to you. What would you like to explore further?"
+      "Das ist wirklich interessant. Kannst du mir mehr darüber erzählen, wie du dich dabei gefühlt hast?",
+      "Ich verstehe. Es klingt, als ob dich das in letzter Zeit beschäftigt.",
+      "Danke, dass du das mit mir geteilt hast. Was denkst du, könnte in dieser Situation helfen?",
+      "Das ist eine durchdachte Beobachtung. Wie gehst du normalerweise mit solchen Situationen um?",
+      "Ich kann verstehen, warum das wichtig für dich ist. Was würdest du gerne weiter erkunden?"
     ];
     
     return responses[Math.floor(Math.random() * responses.length)];

@@ -87,33 +87,33 @@ const ProfileSheet = ({ children }: ProfileSheetProps) => {
       <SheetTrigger asChild>
         {children}
       </SheetTrigger>
-      <SheetContent side="bottom" className="bg-gray-900 border-gray-800 max-h-[80vh]">
+      <SheetContent side="bottom" className="bg-background border-border max-h-[80vh] mineral-gradient-primary">
         <SheetHeader className="mb-6">
-          <SheetTitle className="text-white text-xl">Profil-Einstellungen</SheetTitle>
+          <SheetTitle className="text-foreground text-xl">Profil-Einstellungen</SheetTitle>
         </SheetHeader>
         
-        <div className="space-y-2 overflow-y-auto">
+        <div className="space-y-3 overflow-y-auto">
           {menuItems.map((item) => {
             const IconComponent = item.icon;
             return (
               <button
                 key={item.title}
-                className="w-full flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+                className="w-full flex items-center justify-between p-4 mineral-card hover:mineral-shadow-medium rounded-lg transition-all duration-200 mineral-hover"
                 onClick={() => {
                   console.log(`Geklickt: ${item.title}`);
                   // Handle navigation here
                 }}
               >
                 <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
-                    <IconComponent className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center mineral-shadow-soft">
+                    <IconComponent className="w-5 h-5 text-secondary-foreground" />
                   </div>
                   <div className="text-left">
-                    <h3 className="text-white font-medium">{item.title}</h3>
-                    <p className="text-gray-400 text-sm">{item.description}</p>
+                    <h3 className="text-foreground font-medium">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm">{item.description}</p>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-gray-400" />
+                <ChevronRight className="w-5 h-5 text-muted-foreground" />
               </button>
             );
           })}

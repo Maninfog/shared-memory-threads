@@ -13,7 +13,7 @@ export const useChat = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      content: 'Hi! I\'m here to help you with your journaling. What\'s on your mind today?',
+      content: 'Hallo! Ich bin hier, um dir beim Tagebuchschreiben zu helfen. Was beschäftigt dich heute?',
       role: 'assistant',
       timestamp: new Date()
     }
@@ -47,8 +47,8 @@ export const useChat = () => {
 
       setMessages(prev => [...prev, assistantMessage]);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
-      console.error('Chat error:', err);
+      setError(err instanceof Error ? err.message : 'Ein unerwarteter Fehler ist aufgetreten');
+      console.error('Chat-Fehler:', err);
     } finally {
       setIsLoading(false);
     }
@@ -57,7 +57,7 @@ export const useChat = () => {
   const clearChat = useCallback(() => {
     setMessages([{
       id: '1',
-      content: 'Hi! I\'m here to help you with your journaling. What\'s on your mind today?',
+      content: 'Hallo! Ich bin hier, um dir beim Tagebuchschreiben zu helfen. Was beschäftigt dich heute?',
       role: 'assistant',
       timestamp: new Date()
     }]);

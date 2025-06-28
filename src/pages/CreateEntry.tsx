@@ -46,7 +46,7 @@ const CreateEntry = () => {
     if (userMessages.length > 0) {
       const combinedText = userMessages.map(m => m.content).join('\n\n');
       addEntry(combinedText, 'private');
-      navigate('/groups');
+      navigate('/home');
     }
   };
 
@@ -56,7 +56,7 @@ const CreateEntry = () => {
       <div className="border-b border-border bg-background/95 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-xl font-semibold text-foreground">Journal Chat</h1>
+            <h1 className="text-xl font-semibold text-foreground">Tagebuch Chat</h1>
             <div className="flex items-center space-x-2">
               <Button 
                 onClick={clearChat}
@@ -64,7 +64,7 @@ const CreateEntry = () => {
                 size="sm"
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
-                Reset
+                Zurücksetzen
               </Button>
               <Button 
                 onClick={handleSaveAsEntry}
@@ -72,7 +72,7 @@ const CreateEntry = () => {
                 size="sm"
                 disabled={messages.filter(m => m.role === 'user').length === 0}
               >
-                Save as Entry
+                Als Eintrag speichern
               </Button>
             </div>
           </div>
@@ -159,7 +159,7 @@ const CreateEntry = () => {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Type your message here..."
+              placeholder="Schreibe deine Nachricht hier..."
               className="min-h-[60px] max-h-32 resize-none pr-12 rounded-xl border-2 focus:border-primary"
               disabled={isLoading}
             />
