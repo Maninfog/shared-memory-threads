@@ -1,94 +1,91 @@
-import { useState, useEffect } from 'react';
+
+import { useState } from 'react';
+import { useJournalEntries } from '../hooks/useJournalEntries';
 import JournalHeader from './JournalHeader';
 import JournalContent from './JournalContent';
-import PostingAnimation from './PostingAnimation';
-import { useJournalEntries } from '../hooks/useJournalEntries';
-import { groupNames } from '../data/journalData';
+import JournalEntryInput from './JournalEntryInput';
+import InviteMemberDialog from './InviteMemberDialog';
 
 interface JournalProps {
   selectedGroup?: string;
   onBackToDashboard: () => void;
-  pendingEntry?: string | null;
-  onEntryProcessed?: () => void;
 }
 
-const Journal = ({ selectedGroup, onBackToDashboard, pendingEntry, onEntryProcessed }: JournalProps) => {
+const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
   const { entries, addEntry } = useJournalEntries();
-  const [showPostingAnimation, setShowPostingAnimation] = useState(false);
-  const [lastEntryId, setLastEntryId] = useState<number | null>(null);
+  const [showInviteDialog, setShowInviteDialog] = useState(false);
 
-  // Handle pending entry from the create dialog
-  useEffect(() => {
-    if (pendingEntry && selectedGroup) {
-      setShowPostingAnimation(true);
-      handleAddEntry(pendingEntry);
-      onEntryProcessed?.();
+  const handleAddEntry = (text: string) => {
+    if (selectedGroup) {
+      addEntry(text, selectedGroup);
     }
-  }, [pendingEntry, selectedGroup]);
+  };
 
   const handleExport = () => {
-    console.log('Gruppendaten exportieren geklickt');
+    const groupEntries = entries.filter(entry => entry.group === selectedGroup);
+    const exportData = JSON.stringify(groupEntries, null, 2);
+    const blob = new Blob([exportData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${selectedGroup}-journal-export.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const handleAddMember = () => {
     console.log('Mitglied hinzufügen geklickt');
+    setShowInviteDialog(true);
   };
 
-  const handleChapterSelect = (chapterId: string) => {
-    console.log('Chapter selected:', chapterId);
+  const getGroupName = (groupId?: string) => {
+    const groupNames: { [key: string]: string } = {
+      'best-friend': 'Best Friend',
+      'private': 'Private',
+      'family': 'Familie',
+      'work-colleagues': 'Arbeitskollegen'
+    };
+    return groupNames[groupId || ''] || 'Unbekannte Gruppe';
   };
 
-  const handleAddEntry = (text: string) => {
-    const newEntry = addEntry(text, selectedGroup);
-    setLastEntryId(newEntry?.id || null);
-    setShowPostingAnimation(true);
-  };
+  const filteredEntries = entries.filter(entry => entry.group === selectedGroup);
 
-  const handlePostingComplete = () => {
-    setShowPostingAnimation(false);
-    setLastEntryId(null);
-  };
-
-  const handleViewEntry = () => {
-    if (lastEntryId) {
-      // Scroll to the entry (we'll implement this by finding the entry element)
-      const entryElement = document.querySelector(`[data-entry-id="${lastEntryId}"]`);
-      if (entryElement) {
-        entryElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }
-    setShowPostingAnimation(false);
-  };
-
-  const currentGroupName = selectedGroup ? groupNames[selectedGroup] : 'Home';
+  if (!selectedGroup) {
+    return (
+      <div className="min-h-screen flex items-center justify-center mineral-gradient-primary">
+        <div className="text-center">
+          <h2 className="text-2xl font-medium text-mineral-primary mb-2">Keine Gruppe ausgewählt</h2>
+          <p className="text-mineral-secondary">Wählen Sie eine Gruppe aus dem Dashboard aus.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <section className="bg-black min-h-screen">
-      <div className="max-w-2xl mx-auto">
-        <JournalHeader
-          currentGroupName={currentGroupName}
-          selectedGroup={selectedGroup}
-          onBackToDashboard={onBackToDashboard}
-          onExport={handleExport}
-          onAddMember={handleAddMember}
-        />
-
-        <PostingAnimation
-          isVisible={showPostingAnimation}
-          onComplete={handlePostingComplete}
-          onViewEntry={handleViewEntry}
-        />
-
-        <JournalContent
-          selectedGroup={selectedGroup}
-          entries={entries}
-          groupNames={groupNames}
-          groupColors={{}}
-          onAddEntry={handleAddEntry}
-          onChapterSelect={handleChapterSelect}
-        />
+    <div className="min-h-screen mineral-gradient-primary">
+      <JournalHeader 
+        currentGroupName={getGroupName(selectedGroup)}
+        selectedGroup={selectedGroup}
+        onBackToDashboard={onBackToDashboard}
+        onExport={handleExport}
+        onAddMember={handleAddMember}
+      />
+      
+      <div className="mineral-container">
+        <div className="max-w-4xl mx-auto">
+          <JournalEntryInput onAddEntry={handleAddEntry} />
+          <JournalContent entries={filteredEntries} />
+        </div>
       </div>
-    </section>
+
+      <InviteMemberDialog 
+        open={showInviteDialog}
+        onOpenChange={setShowInviteDialog}
+        groupName={getGroupName(selectedGroup)}
+      />
+    </div>
   );
 };
 
