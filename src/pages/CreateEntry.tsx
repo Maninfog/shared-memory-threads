@@ -16,7 +16,7 @@ const CreateEntry = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { addEntry } = useJournalEntries();
-  const { messages, isLoading, error, sendMessage, clearChat } = useChat();
+  const { messages, isLoading, error, sendMessage, addUserMessage, clearChat } = useChat();
   const navigate = useNavigate();
 
   const scrollToBottom = () => {
@@ -37,13 +37,7 @@ const CreateEntry = () => {
       await sendMessage(messageToSend);
     } else {
       // In normal mode, just add the text as a user message without AI response
-      const userMessage = {
-        id: Date.now().toString(),
-        content: messageToSend,
-        role: 'user' as const,
-        timestamp: new Date()
-      };
-      // We'll need to update the useChat hook to handle this
+      addUserMessage(messageToSend);
     }
   };
 
@@ -116,7 +110,7 @@ const CreateEntry = () => {
                   onClick={handleSaveAsEntry}
                   variant="outline"
                   size="sm"
-                  disabled={!inputValue.trim() && messages.filter(m => m.role === 'user').length === 0}
+                  disabled={messages.filter(m => m.role === 'user').length === 0}
                 >
                   Eintrag speichern
                 </Button>
@@ -139,7 +133,8 @@ const CreateEntry = () => {
       <ScrollArea className="flex-1 pb-20">
         <div className="max-w-4xl mx-auto px-4 py-6">
           <div className="space-y-6">
-            {isAiMode ? (
+            {/* Show messages if there are any, or show placeholder */}
+            {messages.length > 0 ? (
               <>
                 {messages.map((message) => (
                   <div
@@ -180,7 +175,7 @@ const CreateEntry = () => {
                   </div>
                 ))}
 
-                {isLoading && (
+                {isLoading && isAiMode && (
                   <div className="flex items-start space-x-3 justify-start">
                     <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                       <Bot className="w-4 h-4 text-primary-foreground" />
@@ -197,8 +192,15 @@ const CreateEntry = () => {
               </>
             ) : (
               <div className="text-center text-muted-foreground py-8">
-                <p className="text-lg mb-2">Schreibe deinen Tagebucheintrag</p>
-                <p className="text-sm">Verwende das Textfeld unten, um deine Gedanken festzuhalten.</p>
+                <p className="text-lg mb-2">
+                  {isAiMode ? 'Starte ein Gespräch mit der AI' : 'Schreibe deinen Tagebucheintrag'}
+                </p>
+                <p className="text-sm">
+                  {isAiMode 
+                    ? 'Die AI hilft dir beim Reflektieren und Schreiben deiner Gedanken.'
+                    : 'Verwende das Textfeld unten, um deine Gedanken festzuhalten.'
+                  }
+                </p>
               </div>
             )}
           </div>
