@@ -47,25 +47,10 @@ const Pricing = () => {
       ],
       cta: "Plan wählen",
       popular: false
-    },
-    {
-      name: "Enterprise",
-      price: "ab 199 €",
-      period: "/Monat",
-      description: "Für Coaching-Praxen, HR-Abteilungen oder Unternehmensanwendungen.",
-      features: [
-        "SSO & SCIM-Unterstützung",
-        "API- und SDK-Zugriff",
-        "Service Level Agreements (SLAs)",
-        "Dedizierter Enterprise-Support"
-      ],
-      cta: "Kontakt aufnehmen",
-      popular: false
     }
   ];
 
   const handleContactExperts = () => {
-    // This would typically open a contact form or redirect to a contact page
     console.log('Kontakt mit Experten aufnehmen');
   };
 
@@ -84,7 +69,7 @@ const Pricing = () => {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {plans.map((plan, index) => (
             <Card 
               key={index} 
