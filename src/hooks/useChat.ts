@@ -54,6 +54,19 @@ export const useChat = () => {
     }
   }, []);
 
+  const addUserMessage = useCallback((content: string) => {
+    if (!content.trim()) return;
+
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      content,
+      role: 'user',
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+  }, []);
+
   const clearChat = useCallback(() => {
     setMessages([{
       id: '1',
@@ -70,6 +83,7 @@ export const useChat = () => {
     isLoading,
     error,
     sendMessage,
+    addUserMessage,
     clearChat
   };
 };
