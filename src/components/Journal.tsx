@@ -5,6 +5,7 @@ import JournalHeader from './JournalHeader';
 import JournalContent from './JournalContent';
 import JournalEntryInput from './JournalEntryInput';
 import InviteMemberDialog from './InviteMemberDialog';
+import { groupNames, groupColors } from '../data/journalData';
 
 interface JournalProps {
   selectedGroup?: string;
@@ -40,14 +41,18 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
     setShowInviteDialog(true);
   };
 
+  const handleChapterSelect = (chapterId: string) => {
+    console.log('Chapter selected:', chapterId);
+  };
+
   const getGroupName = (groupId?: string) => {
-    const groupNames: { [key: string]: string } = {
+    const groupNameMap: { [key: string]: string } = {
       'best-friend': 'Best Friend',
       'private': 'Private',
       'family': 'Familie',
       'work-colleagues': 'Arbeitskollegen'
     };
-    return groupNames[groupId || ''] || 'Unbekannte Gruppe';
+    return groupNameMap[groupId || ''] || 'Unbekannte Gruppe';
   };
 
   const filteredEntries = entries.filter(entry => entry.group === selectedGroup);
@@ -76,7 +81,14 @@ const Journal = ({ selectedGroup, onBackToDashboard }: JournalProps) => {
       <div className="mineral-container">
         <div className="max-w-4xl mx-auto">
           <JournalEntryInput onAddEntry={handleAddEntry} />
-          <JournalContent entries={filteredEntries} />
+          <JournalContent 
+            entries={filteredEntries}
+            selectedGroup={selectedGroup}
+            groupNames={groupNames}
+            groupColors={groupColors}
+            onAddEntry={handleAddEntry}
+            onChapterSelect={handleChapterSelect}
+          />
         </div>
       </div>
 
