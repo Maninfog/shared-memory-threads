@@ -1,5 +1,5 @@
-
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Sheet, 
   SheetContent, 
@@ -28,6 +28,7 @@ interface ProfileSheetProps {
 
 const ProfileSheet = ({ children }: ProfileSheetProps) => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const menuItems = [
     {
@@ -82,6 +83,16 @@ const ProfileSheet = ({ children }: ProfileSheetProps) => {
     },
   ];
 
+  const handleMenuItemClick = (title: string) => {
+    if (title === "Mitgliedschaft") {
+      navigate('/pricing');
+      setOpen(false);
+    } else {
+      console.log(`Geklickt: ${title}`);
+      // Handle other navigation here
+    }
+  };
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
@@ -99,10 +110,7 @@ const ProfileSheet = ({ children }: ProfileSheetProps) => {
               <button
                 key={item.title}
                 className="w-full flex items-center justify-between p-4 mineral-card hover:mineral-shadow-medium rounded-lg transition-all duration-200 mineral-hover"
-                onClick={() => {
-                  console.log(`Geklickt: ${item.title}`);
-                  // Handle navigation here
-                }}
+                onClick={() => handleMenuItemClick(item.title)}
               >
                 <div className="flex items-center space-x-4">
                   <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center mineral-shadow-soft">
