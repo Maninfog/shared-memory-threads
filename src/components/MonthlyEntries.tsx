@@ -1,3 +1,4 @@
+
 import JournalEntryCard from './JournalEntryCard';
 import { JournalEntry, GroupNames } from '../types/JournalTypes';
 
@@ -44,11 +45,11 @@ const MonthlyEntries = ({ entries, groupNames, selectedGroup }: MonthlyEntriesPr
         
         return (
           <div key={monthKey} className="mb-8">
-            <div className="sticky top-16 bg-black/800 backdrop-blur-sm border-b border-gray-800 py-3 px-4 mb-4">
-              <h3 className="text-lg font-semibold text-white capitalize">
+            <div className="sticky top-16 mineral-gradient-primary backdrop-blur-sm border-b border-mineral py-3 px-4 mb-4 mineral-shadow-soft">
+              <h3 className="text-lg font-semibold text-mineral-primary capitalize">
                 {label}
               </h3>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-mineral-secondary">
                 {entries.length} {entries.length === 1 ? 'Eintrag' : 'Einträge'}
               </p>
             </div>
