@@ -1,4 +1,5 @@
-import { Plus, Users, Heart, Home as HomeIcon, Briefcase, TrendingUp } from 'lucide-react';
+
+import { Plus, Users, Heart, Home as HomeIcon, Briefcase, TrendingUp, CreditCard } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import BottomNav from '@/components/BottomNav';
 import { useNavigate } from 'react-router-dom';
@@ -100,6 +101,27 @@ const Home = () => {
                     </h3>
                     <p className="text-mineral-secondary text-sm">
                       Verwalte deine Journal-Gruppen
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card 
+              className="mineral-card mineral-hover cursor-pointer" 
+              onClick={() => navigate('/pricing')}
+            >
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-4">
+                  <div className="bg-primary p-3 rounded-lg">
+                    <CreditCard className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-mineral-primary">
+                      Mitgliedschaft
+                    </h3>
+                    <p className="text-mineral-secondary text-sm">
+                      Wählen Sie Ihr Abo-Modell
                     </p>
                   </div>
                 </div>
