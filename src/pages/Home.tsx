@@ -1,4 +1,3 @@
-
 import { Plus, Users, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import BottomNav from '@/components/BottomNav';
@@ -59,6 +58,14 @@ const Home = () => {
           })}
         </div>
 
+        {/* Search Field */}
+        <div className="space-y-4 mb-8">
+          <h2 className="text-xl font-medium text-mineral-primary">
+            Journal durchsuchen
+          </h2>
+          <SearchField />
+        </div>
+
         {/* Quick Actions */}
         <div className="space-y-4 mb-8">
           <h2 className="text-xl font-medium text-mineral-primary">
@@ -108,14 +115,6 @@ const Home = () => {
               </CardContent>
             </Card>
           </div>
-        </div>
-
-        {/* Search Field */}
-        <div className="space-y-4 mb-8">
-          <h2 className="text-xl font-medium text-mineral-primary">
-            Journal durchsuchen
-          </h2>
-          <SearchField />
         </div>
 
         {/* Journal Overview Placeholder */}
