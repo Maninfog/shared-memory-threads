@@ -72,7 +72,7 @@ const CreateEntry = () => {
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-semibold text-foreground">
-              {isAiMode ? 'Tagebuch Chat' : 'Tagebuch Eintrag'}
+              Journal
             </h1>
             <div className="flex items-center space-x-4">
               {/* AI Toggle */}
