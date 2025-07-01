@@ -1,3 +1,4 @@
+
 import { Plus, Users, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import BottomNav from '@/components/BottomNav';
@@ -115,20 +116,6 @@ const Home = () => {
               </CardContent>
             </Card>
           </div>
-        </div>
-
-        {/* Journal Overview Placeholder */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-medium text-mineral-primary">
-            Journal-Überblick
-          </h2>
-          <Card className="mineral-card">
-            <CardContent className="p-6 text-center">
-              <p className="text-mineral-secondary">
-                Hier sehen Sie Ihren Journal-Überblick
-              </p>
-            </CardContent>
-          </Card>
         </div>
       </div>
 
