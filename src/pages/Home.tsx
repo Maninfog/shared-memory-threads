@@ -1,7 +1,8 @@
 
-import { Plus, Users, Heart, Home as HomeIcon, Briefcase, TrendingUp, CreditCard } from 'lucide-react';
+import { Plus, Users, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import BottomNav from '@/components/BottomNav';
+import SearchField from '@/components/SearchField';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
@@ -59,7 +60,7 @@ const Home = () => {
         </div>
 
         {/* Quick Actions */}
-        <div className="space-y-4">
+        <div className="space-y-4 mb-8">
           <h2 className="text-xl font-medium text-mineral-primary">
             Schnellzugriff
           </h2>
@@ -106,28 +107,29 @@ const Home = () => {
                 </div>
               </CardContent>
             </Card>
-
-            <Card 
-              className="mineral-card mineral-hover cursor-pointer" 
-              onClick={() => navigate('/pricing')}
-            >
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-4">
-                  <div className="bg-primary p-3 rounded-lg">
-                    <CreditCard className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium text-mineral-primary">
-                      Mitgliedschaft
-                    </h3>
-                    <p className="text-mineral-secondary text-sm">
-                      Wählen Sie Ihr Abo-Modell
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
+        </div>
+
+        {/* Search Field */}
+        <div className="space-y-4 mb-8">
+          <h2 className="text-xl font-medium text-mineral-primary">
+            Journal durchsuchen
+          </h2>
+          <SearchField />
+        </div>
+
+        {/* Journal Overview Placeholder */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-medium text-mineral-primary">
+            Journal-Überblick
+          </h2>
+          <Card className="mineral-card">
+            <CardContent className="p-6 text-center">
+              <p className="text-mineral-secondary">
+                Hier sehen Sie Ihren Journal-Überblick
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
